@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de plaza en el bootcamp</title>
+</head>
+
+<body>
+    <main>
+        <h1>Reserva de plaza en el bootcamp</h1>
+
+        <form action="#" method="get">
+            <fieldset>
+                <legend>Datos personales</legend>
+
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" placeholder="Ingrese su nombre" required>
+
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required placeholder="Ingrese su email" maxlength="100"
+                    title="Ingrese un correo electrónico válido con un máximo de 100 caracteres">
+            </fieldset>
+
+            <fieldset>
+                <legend>Modalidad de estudio</legend>
+
+                <label for="mode">Seleccione una opción:</label>
+                <select id="mode" name="mode" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="presencial">Presencial</option>
+                    <option value="online">Online</option>
+                    <option value="hibrido">Híbrido</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Áreas de interés</legend>
+
+                <label><input type="checkbox" name="interest" value="frontend"> Frontend</label>
+                <label><input type="checkbox" name="interest" value="backend"> Backend</label>
+                <label><input type="checkbox" name="interest" value="fullstack"> Fullstack</label>
+                <label><input type="checkbox" name="interest" value="mobile"> Mobile</label>
+                <label><input type="checkbox" name="interest" value="data"> Data</label>
+                <label><input type="checkbox" name="interest" value="devops"> Devops</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Motivación</legend>
+
+                <label for="motivation">Cuéntanos por qué quieres unirte al bootcamp:</label>
+                <p id="motivation-help">Escribe al menos 2-3 frases sobre tu motivación.</p>
+                <textarea id="motivation" name="motivation" rows="4" cols="50"
+                    placeholder="Escribe tu motivación aquí..." required aria-describedby="motivation-help"></textarea>
+            </fieldset>
+
+            <button type="submit">Enviar reserva</button>
+
+
+        </form>
+
+
+
+    </main>
+
+
+</body>
+
+</html>
