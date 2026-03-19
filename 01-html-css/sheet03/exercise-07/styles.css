@@ -1,0 +1,13 @@
+main {
+    width: calc(100% - 20px);
+}
+
+h1 {
+    font-size: clamp(1rem, 2rem, 3rem);
+    color: blue;
+}
+
+aside {
+    width: min(100px, 40%);
+    height: max(100px, 10vh);
+}
