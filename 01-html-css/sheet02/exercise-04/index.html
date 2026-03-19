@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de cursos</title>
+</head>
+
+<body>
+    <main>
+        <h1>Buscador de cursos</h1>
+        <form action="#" method="get">
+            <div>
+                <label for="search">Buscar curso:</label>
+                <input type="search" name="search" id="search" placeholder="Escribe el nombre del curso">
+            </div>
+            <div>
+                <label for="category">Categoría:</label>
+                <select name="category" id="category">
+                    <option value="all">Todas</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="design">Diseño</option>
+                </select>
+            </div>
+            <div>
+                <label for="duration">Duración:</label>
+                <input type="number" name="duration" id="duration" min="1" max="12">
+            </div>
+            <div>
+                <label for="inicio">Fecha de inicio:</label>
+                <input type="date" name="inicio" id="inicio">
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Rango de precios:</legend>
+                    <label><input type="checkbox" name="price-range" value="free"> Gratuito</label>
+                    <label><input type="checkbox" name="price-range" value="cheap"> De 0 a 50</label>
+                    <label><input type="checkbox" name="price-range" value="medium-range"> De 50 a 100</label>
+                    <label><input type="checkbox" name="price-range" value="expensive"> Más de 100</label>
+                </fieldset>
+
+            </div>
+            <div>
+                <button type="submit">Buscar</button>
+            </div>
+        </form>
+
+    </main>
+
+</body>
+
+</html>
