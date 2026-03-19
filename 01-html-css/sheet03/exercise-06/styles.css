@@ -1,0 +1,37 @@
+:root {
+    --color-primary: rgb(103, 120, 197);
+    --color-text: rgb(7, 7, 7);
+    --color-background: rgb(112, 172, 132);
+    --space-avg: 1rem;
+    --border-radius-avg: 5rem;
+
+}
+
+header {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: var(--space-avg);
+    text-align: center;
+}
+
+.card {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius-avg);
+    padding: var(--space-avg);
+    margin: var(--space-avg);
+}
+
+.aviso {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: var(--space-avg);
+    ;
+}
+
+.btn {
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    padding: var(--space-avg);
+    border-radius: var(--border-radius-avg);
+    text-decoration: none;
+}
