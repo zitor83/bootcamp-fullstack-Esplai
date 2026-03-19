@@ -1,0 +1,72 @@
+:root {
+    --primary-color: rgb(18, 119, 31);
+    --secondary-color: rgb(149, 28, 185);
+    --avg-distance: 10px;
+    --font-family: 'Swanky and Moo Moo', Arial, sans-serif;
+    --border-radius-avg: 10px;
+    --text-color: rgb(255, 255, 255);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: #111;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+
+    text-align: center;
+    border-radius: var(--border-radius-avg);
+    margin: var(--avg-distance);
+}
+
+main {
+    width: calc(100% - 20px);
+    background: linear-gradient(var(--primary-color), var(--secondary-color));
+    color: var(--text-color);
+    border-radius: var(--border-radius-avg);
+    margin: var(--avg-distance);
+}
+
+footer {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: var(--avg-distance);
+    border-radius: var(--border-radius-avg);
+    margin: var(--avg-distance);
+}
+
+section {
+    margin: var(--avg-distance);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: var(--avg-distance);
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: var(--avg-distance);
+    padding: var(--avg-distance);
+    color: gold;
+}
+
+
+
+
+.btn-contact {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: var(--border-radius-avg);
+    margin: var(--avg-distance);
+
+}
