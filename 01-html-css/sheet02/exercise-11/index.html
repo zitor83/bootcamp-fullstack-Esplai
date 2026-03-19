@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripcion y seguimiento del bootcamp</title>
+</head>
+
+<body>
+    <header>
+        <h1>Inscripcion y seguimiento del bootcamp</h1>
+        <p>Bienvenido al proceso de inscripción y seguimiento del bootcamp. Por favor, completa el formulario a
+            continuación para registrarte.</p>
+    </header>
+    <main>
+        <section>
+            <form>
+                <fieldset>
+                    <legend>Información Personal</legend>
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Escribe tu nombre" required minlength="3"
+                        maxlength="20">
+                    <label for="email">Correo</label>
+                    <input type="email" id="email" name="email" placeholder="Escribe tu correo" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Escribe tu contraseña" required
+                        minlength="6" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                        title="La contraseña debe tener al menos 6 caracteres, incluyendo letras y números.">
+                    <label for="age">Edad</label>
+                    <input type="number" id="age" name="age" placeholder="Escribe tu edad" required min="18" step="1"
+                        title="Debes ser ser mayor de edad para registrarte.">
+                    <label for="website">Web</label>
+                    <input type="url" id="website" name="website" placeholder="Escribe tu website">
+                    <label for="terms">Acepto condiciones</label>
+                    <input type="checkbox" id="terms" name="terms" required
+                        title="Debes aceptar las condiciones para registrarte.">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Preferencias</legend>
+                    <label for="modalidad">Modalidad</label>
+                    <select id="modalidad" name="modalidad">
+                        <option value="presencial">Presencial</option>
+                        <option value="remoto">Remoto</option>
+                    </select>
+
+                    <p>Áreas de interés:</p>
+                    <label><input type="checkbox" name="interes" value="frontend"> Frontend</label>
+                    <label><input type="checkbox" name="interes" value="backend"> Backend</label>
+                    <label><input type="checkbox" name="interes" value="ux"> UX/UI</label>
+                    <label><input type="checkbox" name="interes" value="mobile"> Mobile</label>
+                </fieldset>
+                <button>Enviar</button>
+            </form>
+        </section>
+        <section>
+            <table>
+                <thead>
+                    <caption>Próximas sesiones del bootcamp</caption>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Temática</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">2024-07-01</th>
+                        <td>10:00 - 12:00</td>
+                        <td>Introducción a HTML y CSS</td>
+                        <td>Online</td>
+                        <td><button>Inscribirse</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2024-07-08</th>
+                        <td>10:00 - 12:00</td>
+                        <td>JavaScript Básico</td>
+                        <td>Online</td>
+                        <td><button>Inscribirse</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2024-07-15</th>
+                        <td>10:00 - 12:00</td>
+                        <td>Desarrollo de Proyectos</td>
+                        <td>Online</td>
+                        <td><button>Inscribirse</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Preguntas Frecuentes</h2>
+            <p>Aquí encontrarás respuestas a las preguntas más comunes sobre el bootcamp.</p>
+            <details>
+                <summary>¿Cuánto dura el bootcamp?</summary>
+                <p>El bootcamp tiene una duración de 12 semanas, con clases en vivo y proyectos prácticos.</p>
+            </details>
+            <details>
+                <summary>¿Qué tecnologías se enseñan?</summary>
+                <p>En el bootcamp se enseñan HTML, CSS, JavaScript, React, Node.js y más.</p>
+            </details>
+            <details>
+                <summary>¿Es necesario tener experiencia previa?</summary>
+                <p>No es necesario tener experiencia previa, el bootcamp está diseñado para principiantes.</p>
+            </details>
+        </section>
+        <header>
+            <h2>Panel de progreso del alumno</h2>
+        </header>
+
+        <section>
+            <h3>Progreso del curso</h3>
+            <p>El alumno ha completado el 75% del curso.</p>
+            <progress value="75" max="100"></progress>
+        </section>
+        <section>
+            <h3>Progreso de las tareas</h3>
+            <p>El alumno ha completado 3 de 5 tareas.</p>
+            <progress value="3" max="5"></progress>
+        </section>
+        <section>
+            <h3>Nota media de los examenes</h3>
+            <p>La nota media de los exámenes es 5.</p>
+            <meter value="5" min="0" max="10">5</meter>
+        </section>
+        <section>
+            <h3>Asistencia a clase</h3>
+            <p>El alumno ha asistido a 1 de 3 clases.</p>
+            <meter value="1" min="0" max="3">1</meter>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Bootcamp. Todos los derechos reservados. Contacto: <a href="tel:123456789">Tlf: 123456789</a>
+                <a href="mailto:info@bootcamp.com">Email: info@bootcamp.com</a>
+            </p>
+        </footer>
+    </main>
+</body>
+
+</html>
