@@ -1,0 +1,29 @@
+.local:hover {
+    color: red;
+}
+
+button:focus-visible {
+    outline: 3px solid #e9202a;
+}
+
+input:checked {
+    accent-color: #e9202a;
+}
+
+input:disabled {
+    background-color: #aca7a8;
+}
+
+ul li:first-child,
+ul li:last-child {
+    color: red;
+}
+
+li:nth-child(odd) {
+    background-color: blue;
+
+}
+
+li:nth-child(even) {
+    background-color: green;
+}
