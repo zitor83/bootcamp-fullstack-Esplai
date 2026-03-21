@@ -1,0 +1,26 @@
+.caja {
+    width: 100px;
+
+    padding: 1rem;
+    border: 2px solid rgb(4, 19, 13);
+    margin: 1rem;
+    border-radius: 5px;
+}
+
+.roja {
+    background-color: red;
+    padding: 4rem;
+}
+
+.verde {
+    background-color: green;
+    margin: 3rem;
+}
+
+.azul {
+    background-color: blue;
+}
+
+* {
+    box-sizing: border-box;
+}
