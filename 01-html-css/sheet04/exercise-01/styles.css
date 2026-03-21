@@ -1,0 +1,19 @@
+nav a{
+    color: #0400ff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav > a{
+    color: blueviolet;
+}
+
+h2 + p{
+    margin-top: 0px;
+}
+input[required]{
+    border: 2px solid red;
+}
+input[type="email"]{
+    background-color: lightblue;
+}
