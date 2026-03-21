@@ -1,0 +1,19 @@
+li::before {
+    content: "#";
+    color: red;
+}
+
+a::after {
+    content: " *";
+    color: red;
+}
+
+input::placeholder {
+    color: rgb(192, 13, 183);
+    background-color: rgb(128, 202, 144);
+}
+
+::selection {
+    color: white;
+    background-color: rgb(29, 11, 92);
+}
