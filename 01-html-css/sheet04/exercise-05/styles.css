@@ -1,0 +1,12 @@
+.muchotexto {
+    height: 4rem;
+    overflow: hidden;
+}
+
+span {
+    display: inline-block;
+}
+
+.oculta {
+    display: none;
+}
