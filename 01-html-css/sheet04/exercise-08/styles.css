@@ -77,7 +77,7 @@ main {
     width: 300px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
 
     & .curso-card__titulo {
         color: #2c3e50;
@@ -140,6 +140,7 @@ main {
     & .formulario__input--area {
         height: 100px;
         overflow: auto;
+
         /* Aquí entra el overflow */
         resize: vertical;
     }
