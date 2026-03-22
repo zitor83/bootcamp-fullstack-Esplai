@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de cursos disponibles</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header" id="inicio">
+        <h1 class="header__titulo">Panel de cursos disponibles</h1>
+        <nav class="header__nav">
+            <ul class="header__lista">
+                <li class="header__item"><a href="#inicio" class="header__enlace">Inicio</a></li>
+                <li class="header__item"><a href="#cursos" class="header__enlace">Cursos</a></li>
+                <li class="header__item"><a href="#contacto" class="header__enlace">Contacto</a></li>
+                <li class="header__item"><a href="#faq" class="header__enlace">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cursos" id="cursos">
+            <h2 class="cursos__titulo">Cursos disponibles</h2>
+
+            <div class="cursos__grid">
+
+                <article class="curso-card">
+                    <h3 class="curso-card__titulo">Curso de HTML</h3>
+                    <p class="curso-card__texto">Aprende los fundamentos de HTML para crear páginas web.</p>
+                    <a href="http://ejemploquenoexiste.com/curso-html" target="_blank" class="curso-card__enlace"
+                        rel="noopener noreferrer">Más
+                        información</a>
+                </article>
+                <article class="curso-card">
+                    <h3 class="curso-card__titulo">Curso de CSS</h3>
+                    <p class="curso-card__texto">Domina el diseño y la presentación de tus páginas web con CSS.</p>
+                    <a href="http://ejemploquenoexiste.com/curso-css" target="_blank" class="curso-card__enlace"
+                        rel="noopener noreferrer">Más
+                        información</a>
+                </article>
+                <article class="curso-card">
+                    <h3 class="curso-card__titulo">Curso de JavaScript</h3>
+                    <p class="curso-card__texto">Agrega interactividad a tus páginas web con JavaScript.</p>
+                    <a href="http://ejemploquenoexiste.com/curso-javascript" target="_blank" class="curso-card__enlace"
+                        rel="noopener noreferrer">Más
+                        información</a>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="contacto" id="contacto">
+            <h2 class="contacto__titulo">Contacto</h2>
+            <p class="contacto__texto">Si tienes alguna pregunta sobre los cursos, no dudes en contactarnos a través de
+                nuestro formulario de contacto.</p>
+
+            <form class="formulario" action="#" method="post">
+                <h3 class="formulario__titulo">Formulario de contacto</h3>
+                <label for="nombre" class="formulario__label">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required class="formulario__input"
+                    placeholder="Tu nombre completo">
+
+                <label for="email" class="formulario__label">Email:</label>
+                <input type="email" id="email" name="email" required class="formulario__input" placeholder="Tu email">
+
+                <label for="mensaje" class="formulario__label">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" required class="formulario__input formulario__input--area"
+                    placeholder="Tu mensaje"></textarea>
+
+                <button type="submit" class="formulario__boton">Enviar</button>
+            </form>
+
+            <p class="contacto__texto">También nos puedes contactar por correo electrónico o por teléfono.</p>
+            <ul class="contacto__lista">
+                <li class="contacto__item">Email: contacto@ejemplo.com</li>
+                <li class="contacto__item">Teléfono: 123-456-7890</li>
+            </ul>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2 class="faq__titulo">FAQ</h2>
+
+            <details class="faq__item">
+                <summary class="faq__pregunta">¿Qué es un curso?</summary>
+                <p class="faq__respuesta">Un curso es una serie de lecciones o módulos diseñados para enseñar un tema
+                    específico.</p>
+            </details>
+            <details class="faq__item">
+                <summary class="faq__pregunta">¿Cómo me inscribo en un curso?</summary>
+                <p class="faq__respuesta">Para inscribirte en un curso, simplemente haz clic en el enlace del curso y
+                    sigue las instrucciones.</p>
+            </details>
+            <details class="faq__item">
+                <summary class="faq__pregunta">¿Puedo acceder a los cursos en cualquier momento?</summary>
+                <p class="faq__respuesta">Sí, una vez que te inscribes en un curso, tendrás acceso a él de forma
+                    indefinida.</p>
+            </details>
+            <details class="faq__item">
+                <summary class="faq__pregunta">¿Ofrecen certificados al finalizar un curso?</summary>
+                <p class="faq__respuesta">Sí, al completar un curso recibirás un certificado que podrás descargar.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__texto">&copy; 2026 Panel de cursos disponibles. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
