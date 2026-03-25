@@ -31,12 +31,12 @@ body {
     background-color: var(--color-primary);
     color: var(--color-text);
     line-height: 1.5;
-    padding: var(--spacing-large);    /* Quitamos el display grid y el place-content que nos estaban aplastando la caja */
+    padding: var(--spacing-large);
 }
 
 main {
     width: 100%;
-    max-width: 900px; /* Reducimos de 1100px a 900px. Este es el punto dulce. */
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -44,7 +44,7 @@ main {
 
 /* ESTILOS DE LOS COMPONENTES */
 .search-bar {
-    width: 100%;    /* Hemos borrado el max-width para que respire al 100% del main */
+    width: 100%;   
     margin-bottom: var(--spacing-medium); 
     display: flex;
     justify-content: center;
@@ -63,11 +63,18 @@ main {
     font-family: inherit;
     font-size: 1.1rem;
     color: var(--color-text);
-    text-align: center; /* Magia: centramos el texto y el placeholder como en la foto */
+    text-align: center;     /* Centramos el texto y el placeholder como en la foto */
+    transition: outline 0.2s ease, transform 0.2s ease;
+}
+
+.search-bar input:focus-visible {
+    outline: 2px solid var(--color-terciary); /* Un borde rojo estilo Pokémon */
+    outline-offset: 2px;
+    transform: scale(1.02); /* Crece un poco para tomar protagonismo */
 }
 
 .search-bar input::placeholder {
-    color: #ccc;    /* El texto fantasma muy clarito como en la foto */
+    color: #ccc;    
 }
 
 .pokemon-grid {
@@ -80,30 +87,40 @@ main {
 .pokemon-card {
     background-color: white;
     box-shadow: var(--shadow-card);
-    border-radius: var(--radius-sm); /* Las esquinas redondeadas */
-    overflow: hidden; /* Súper importante: recorta el fondo gris de la imagen para que no tape las esquinas redondas */
+    border-radius: var(--radius-sm); 
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    animation: fade-in-up 0.5s ease both;
+}
+
+.pokemon-card:hover {
+    /* Novedad: Desplazamiento corto hacia arriba y sombra más amplia [cite: 494, 495] */
+    transform: translateY(-6px); 
+    box-shadow: 0 12px 28px rgb(0 0 0 / 20%);
 }
 
 .pokemon-card .pokemon-image-container {
     background-color: var(--color-secondary);
-    position: relative;     /* Quitamos el height: 220px y usamos esto: */
-    aspect-ratio: 4 / 3; /* Hace que la caja sea un poco más ancha que alta, como en la foto original */
+    position: relative;     
+    aspect-ratio: 4 / 3; 
     display: flex; 
     justify-content: center;
     align-items: center;
 }
 
 .pokemon-card .pokemon-image-container img {
-    width: 120px;    /* Damos un tamaño fijo a las imágenes para que todas cuadren */
+    width: 120px;    
     height: 120px;
-    object-fit: contain;    /* Evita que los Pokémon se deformen */
+    object-fit: contain; 
+    animation: fade-in-up 2s ease both;
 }
 
 .pokemon-card .pokemon-image-container .pokemon-id {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #cdcdc8;    /* Gris ligeramente más oscuro que --color-secondary */
+    background-color: #cdcdc8;    
     padding: 0.2rem 0.6rem;
     font-size: 0.8rem;
     color: #555;
@@ -111,13 +128,13 @@ main {
 }
 
 .pokemon-card .pokemon-info {
-    padding: 1rem;    /* Aire interior para separar los textos del borde blanco */
+    padding: 1rem;    
 }
 
 .pokemon-card .pokemon-info .pokemon-name {
     font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 0.2rem; /* Reducimos drásticamente la separación */
+    margin-bottom: 0.2rem; 
 }
 
 .pokemon-card .pokemon-info .pokemon-types {
@@ -128,12 +145,12 @@ main {
 
 /* Las píldoras de los tipos */
 .pokemon-card .pokemon-info .pokemon-types li {
-    font-size: 0.65rem; /* Letra un pelín más pequeña */
+    font-size: 0.65rem; 
     list-style: none;
-    border: 1px solid var(--color-secondary); /* Borde más sutil, gris clarito */
+    border: 1px solid var(--color-secondary); 
     color: #777;
-    padding: 0.1rem 0.5rem; /* Menos padding arriba/abajo, más a los lados */
-    border-radius: 4px; /* Un radio un poco más cuadrado */
+    padding: 0.1rem 0.5rem; 
+    border-radius: 4px; 
     font-weight: 500;
     background-color: #f8f8f7d5;
 }
@@ -142,8 +159,8 @@ main {
     margin-top: 1rem;
     font-size: 0.85rem;
     color: #666;
-    border-left: 3px solid #8b4513;    /* La famosa barrita vertical marrón */
-    padding-left: 0.5rem;    /* Separamos un poco el texto de la barrita */
+    border-left: 3px solid #8b4513;    /* Barrita vertical marrón */
+    padding-left: 0.5rem;    
     line-height: 1.2;
     text-transform: lowercase;
 }   
@@ -165,8 +182,8 @@ html::after {
     width: 80px;
     height: 80px;
     background-color: var(--color-text); 
-    transform: rotate(45deg); /* Tu idea: girarlos 45 grados */
-    z-index: -1;
+    transform: rotate(45deg); /* Girarlos 45 grados */
+    z-index: -1; /* Los envía detrás de todo */
 }
 
 /* Cuadrado Izquierdo */
@@ -189,7 +206,7 @@ body::after {
     height: 150px;
     background-color: var(--color-terciary); 
     border-radius: 50%; /* Los hace redondos */
-    z-index: -1;
+    z-index: -1; /* Los envía detrás de todo */
 }
 
 /* Círculo Izquierdo */
@@ -200,4 +217,19 @@ body::before {
 /* Círculo Derecho */
 body::after {
     right: -75px;
+}
+
+/* =========================================
+   ANIMACIONES PARA LOS POKÉMON (Opcional, pero queda chulo)
+   ========================================= */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
