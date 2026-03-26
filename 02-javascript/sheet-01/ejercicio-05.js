@@ -13,7 +13,7 @@ console.log(numero==stringNumero); // true ya que el valor es el mismo
 
 console.log(numero===stringNumero); // false ya que el tipo no es el mismo
 
-console.log(esNumero==true); // true ya que es un número que se convierte a true
+console.log(esNumero==true); // true ya que el valor es el mismo
 
 console.log(stringPatata==esPatata); // false ya que son diferentes 
 
