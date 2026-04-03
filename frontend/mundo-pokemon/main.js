@@ -152,7 +152,8 @@ function crearTarjetaPokemon(pokemon) {
     if (pokemon.evolvesFrom) {
         const pEvolution = document.createElement('p');
         pEvolution.classList.add('pokemon-evolution-from');
-        pEvolution.textContent = `Evoluciona de: ${pokemon.evolvesFrom}`;
+        pEvolution.innerHTML = `Evoluciona de:<br>
+         ${pokemon.evolvesFrom}`;
         divInfo.append(pEvolution);
     }
     tarjetaPokemon.append(divImagen, divInfo);
@@ -160,4 +161,27 @@ function crearTarjetaPokemon(pokemon) {
     return tarjetaPokemon;
 
 }
+// Función para renderizar las tarjetas de los pokemons.
+function renderizarPokemons(pokemons) {
+    // Limpiar el contenedor antes de renderizar las tarjetas
+    contenedorPokemons.innerHTML = '';
 
+    // Crear un fragmento para mejorar el rendimiento al agregar las tarjetas
+    const fragment = document.createDocumentFragment();
+
+    // Recorrer el array de pokemos
+    pokemons.forEach(pokemon => {
+        // Crear la tarjeta del pokemon llamando a la funcion
+        const tarjetaPokemon = crearTarjetaPokemon(pokemon);
+
+        // Agregar la tarjeta al fragmento
+        fragment.append(tarjetaPokemon);
+    }
+    );
+    // Agregar el fragmento al contenedor principal
+    contenedorPokemons.append(fragment);
+
+}
+
+// Llamar a la función para renderizar las tarjetas de los pokemons
+renderizarPokemons(pokemons);
