@@ -118,3 +118,8 @@ export function renderizarPokemons(pokemons) {
     contenedorPokemons.append(fragment);
 
 }
+// Función para mostrar un mensaje de carga mientras se obtienen los datos de los pokemons.
+export function mostrarCargando() {
+    // Inyectamos un mensaje temporal con una clase para poder darle estilos si queremos
+    contenedorPokemons.innerHTML = '<p class="mensaje-carga">Buscando Pokémon entre la hierba alta...</p>';
+}

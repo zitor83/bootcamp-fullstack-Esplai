@@ -238,3 +238,12 @@ body::after {
         transform: translateY(0);
     }
 }
+
+/* ESTILOS PARA EL MENSAJE DE CARGA */
+.mensaje-carga {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #b42929;
+    grid-column: 1 / -1; /* Para que ocupe todo el ancho del grid */
+}
