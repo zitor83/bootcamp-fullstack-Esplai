@@ -18,16 +18,16 @@ async function iniciarRenderizado() {
         // 3. Renderizamos los pokemons en el HTML y borramos el mensaje de carga
          renderizarPokemons(pokemonsAdaptados);
 
-        // 1. Seleccionamos el elemento del DOM que queremos escuchar
+        // 4. Añadimos la funcionalidad de búsqueda por nombre
         const inputBuscador = document.getElementById('search');
 
-        // 2. Le ponemos el "micrófono" para el evento 'input' (se dispara con cada tecla)
+        //Filtramos los pokemons mientras el usuario escribe en la barra de búsqueda
         inputBuscador.addEventListener('input', (evento) => {
             
-            // a) Obtenemos el texto que el usuario ha escrito en la barra de búsqueda
+            //Obtenemos el texto de búsqueda y lo convertimos a minúsculas para hacer una búsqueda case-insensitive
             const textoBusqueda = evento.target.value.toLowerCase();
 
-           // b) Filtramos los pokemons adaptados para quedarnos solo con los que coincidan con el texto de búsqueda
+           // Filtramos el array de pokemons adaptados para quedarnos solo con aquellos cuyo nombre incluye el texto de búsqueda
             const pokemonsFiltrados = pokemonsAdaptados.filter(pokemon => {
                 return pokemon.name.toLowerCase().includes(textoBusqueda);
             });
