@@ -31,3 +31,6 @@ export async function obtenerPokemonsDetallados() {
     // Devolvemos los datos directamente al main
     return await Promise.all(promesasDetalles);
 }
+
+
+
