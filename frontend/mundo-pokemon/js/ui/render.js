@@ -1,52 +1,11 @@
+import { obtenerImagenPokemonSiempre } from "../utils/adapters.js";
+
 //Contenedor donde se van a agregar las tarjetas de los pokemons
 const contenedorPokemons = document.getElementById('tarjetas-automaticas-pokemons');
 
-// console.log(contenedorPokemons);
 
-// //1.Contenedor principal de la tarjeta
-// const tarjetaPokemon = document.createElement('article');
-// tarjetaPokemon.classList.add('pokemon-card');
 
-// //2. Bloque de la imagen
-// const divImagen = document.createElement('div');
-// divImagen.classList.add('pokemon-image-container');
-// // Imagen del pokemon
-// const imagenPokemon = document.createElement('img');
-// imagenPokemon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemons[0].id}.png`;
-// imagenPokemon.alt = pokemons[0].name;
-// // Id del pokemon
-// const divId = document.createElement('div');
-// divId.classList.add('pokemon-id');
-// divId.textContent = `#${pokemons[0].id}`;
-// // Agregar la imagen y el id al bloque de la imagen
-// divImagen.append(imagenPokemon, divId);
-
-// //3. Bloque de la información
-// const divInfo= document.createElement('div');
-// divInfo.classList.add('pokemon-info');
-// // Nombre del pokemon
-// const h2Name = document.createElement('h2');
-// h2Name.classList.add('pokemon-name');
-// h2Name.textContent = pokemons[0].name;
-// // Tipos del pokemon
-// const ulTypes = document.createElement('ul');
-// ulTypes.classList.add('pokemon-types');
-// // Agregar los tipos del pokemon a la lista
-// pokemons[0].type.forEach( type => {
-//     const liType = document.createElement('li');
-//     liType.textContent = type;
-//     ulTypes.append(liType);
-// });
-// // Agregar el nombre y los tipos al bloque de la información
-// divInfo.append(h2Name, ulTypes);
-
-// // Agregar el bloque de la imagen y el bloque de la información a la tarjeta
-// tarjetaPokemon.append(divImagen, divInfo);
-
-// // Agregar la tarjeta al contenedor principal
-// contenedorPokemons.append(tarjetaPokemon);
-
-// Función a partir del codigo anterior para generar las tarjetas de los pokemons de forma dinamica
+// Función para crear la tarjeta de cada pokemon a partir de su información.
 
 function crearTarjetaPokemon(pokemon) {
     const tarjetaPokemon = document.createElement('article');
@@ -56,7 +15,11 @@ function crearTarjetaPokemon(pokemon) {
     divImagen.classList.add('pokemon-image-container');
 
     const imagenPokemon = document.createElement('img');
-    imagenPokemon.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+
+    //Obtenemos la imagen del pokemon utilizando la función que hemos creado en el adapter para asegurarnos de obtener siempre una imagen, aunque no sea la frontal por defecto.
+    const imagenUrl= obtenerImagenPokemonSiempre(pokemon.sprites)
+
+    imagenPokemon.src = imagenUrl || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'; // Si no hay imagen, se muestra una imagen por defecto (un pokeball)
     imagenPokemon.alt = pokemon.name;
 
     const divId = document.createElement('div');
