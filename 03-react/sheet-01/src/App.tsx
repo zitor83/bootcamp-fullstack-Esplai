@@ -3,6 +3,8 @@ import ContactUs from "./components/ejercicio7/ContactUs";
 import Header from "./components/ejercicio7/Header";
 import WhatWillLearn from "./components/ejercicio7/WhatWillLearn";
 import WhoIsFor from "./components/ejercicio7/WhoIsFor";
+import NoticeA from "./components/ejercicio8/NoticeA";
+import NoticeB from "./components/ejercicio8/NoticeB";
 // import Footer from "./components/ejercicio4/Footer";
 // import Header from "./components/ejercicio4/Header";
 // import InfoBox from "./components/ejercicio4/InfoBox";
@@ -32,18 +34,24 @@ import WhoIsFor from "./components/ejercicio7/WhoIsFor";
 //     </>
 //   );
 // }
+// function App() {
+//   return (
+//     <>
+//       <Header />
+//       <WhatWillLearn />
+//       <WhoIsFor />
+//       <ContactUs />
+
+//     </>
+//   );
+
 function App() {
   return (
     <>
-      <Header />
-      <WhatWillLearn />
-      <WhoIsFor />
-      <ContactUs />
-     
+      <NoticeA />
+      <NoticeB />
     </>
   );
 }
 
 export default App;
-
-
