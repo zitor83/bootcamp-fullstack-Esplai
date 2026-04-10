@@ -17,7 +17,7 @@ function crearTarjetaPokemon(pokemon) {
     const imagenPokemon = document.createElement('img');
 
     //Obtenemos la imagen del pokemon utilizando la función que hemos creado en el adapter para asegurarnos de obtener siempre una imagen, aunque no sea la frontal por defecto.
-    const imagenUrl= obtenerImagenPokemonSiempre(pokemon.sprites)
+    const imagenUrl = obtenerImagenPokemonSiempre(pokemon.sprites)
 
     imagenPokemon.src = imagenUrl || 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'; // Si no hay imagen, se muestra una imagen por defecto (un pokeball)
     imagenPokemon.alt = pokemon.name;
@@ -84,5 +84,10 @@ export function renderizarPokemons(pokemons) {
 // Función para mostrar un mensaje de carga mientras se obtienen los datos de los pokemons.
 export function mostrarCargando() {
     // Inyectamos un mensaje temporal con una clase para poder darle estilos si queremos
-    contenedorPokemons.innerHTML = '<p class="mensaje-carga">Buscando Pokémon entre la hierba alta...</p>';
+    contenedorPokemons.innerHTML = `
+        <div class="contenedor-carga">
+            <img src="./js/assets/img/buscando-pokemon.gif" alt="Cargando..." class="gif-carga">
+            <p class="mensaje-carga">Buscando pokemons entre la hierba alta...</p>
+        </div>
+    `;
 }
