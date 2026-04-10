@@ -19,7 +19,7 @@ async function obtenerDetallesEvolucion(urlPokemon) {
 // Función para obtener la lista de pokemons, luego obtener los detalles de cada pokemon,
 export async function obtenerPokemonsDetallados() {
     // 1. Pedimos la lista de pokemons
-    const respuestaLista = await fetch('https://pokeapi.co/api/v2/pokemon/');
+    const respuestaLista = await fetch('https://pokeapi.co/api/v2/pokemon?limit=-1');
     // 2. Convertimos la respuesta a formato JSON(imprescindible para poder trabajar con los datos)
     const datosLista = await respuestaLista.json();
 

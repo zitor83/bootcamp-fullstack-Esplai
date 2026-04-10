@@ -25,7 +25,7 @@ async function iniciarRenderizado() {
         inputBuscador.addEventListener('input', (evento) => {
             
             //Obtenemos el texto de búsqueda y lo convertimos a minúsculas para hacer una búsqueda case-insensitive
-            const textoBusqueda = evento.target.value.toLowerCase();
+            const textoBusqueda = evento.currentTarget.value.toLowerCase();
 
            // Filtramos el array de pokemons adaptados para quedarnos solo con aquellos cuyo nombre incluye el texto de búsqueda
             const pokemonsFiltrados = pokemonsAdaptados.filter(pokemon => {
