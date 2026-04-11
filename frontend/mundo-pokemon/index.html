@@ -23,12 +23,16 @@
             </form>
         </section>
 
-        <section id="tarjetas-automaticas-pokemons" class="pokemon-grid"> 
+        <section id="tarjetas-automaticas-pokemons" class="pokemon-grid">
 
         </section>
         <section class="pagination">
             <button id="btn-anterior" aria-label="Anterior" disabled>Anterior</button>
-            <span id="pagina-actual">Página 1</span>
+            <span class="info-paginacion">
+                Página
+                <input type="number" id="input-pagina" value="1" min="1" title="Escribe un número y pulsa Enter">
+                de <span id="total-paginas">1</span>
+            </span>
             <button id="btn-siguiente" aria-label="Siguiente">Siguiente</button>
 
         </section>

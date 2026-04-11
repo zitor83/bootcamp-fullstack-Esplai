@@ -261,3 +261,41 @@ body::after {
     color: #b42929;
     grid-column: 1 / -1; /* Para que ocupe todo el ancho del grid */
 }
+
+/* =========================================
+   INPUT DE PAGINACIÓN
+   ========================================= */
+.info-paginacion {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#input-pagina {
+    width: 60px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 0.3rem;
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+
+#input-pagina:focus {
+    border-color: var(--color-terciary);
+    transform: scale(1.1); /* Hace un pequeño zoom al hacer click */
+}
+
+/* Magia oscura de CSS para ocultar las flechitas del input de número */
+#input-pagina::-webkit-inner-spin-button, 
+#input-pagina::-webkit-outer-spin-button { 
+    appearance: none; 
+    margin: 0; 
+}
