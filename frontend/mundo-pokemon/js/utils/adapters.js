@@ -11,7 +11,18 @@ export function transformarPokemons(arrayPokemosDetallados) {
             id: pokemon.id,
             name: pokemon.name,
             type: tipos,
-            evolvesFrom: pokemon.evolvesFrom
+            evolvesFrom: pokemon.evolvesFrom,
+            sprites: pokemon.sprites
         };
     });
+}
+
+export function obtenerImagenPokemonSiempre(sprites) {
+  return (
+      sprites?.front_default ||
+      sprites?.front_shiny ||
+      sprites?.other?.home?.front_default ||
+      sprites?.other?.['official-artwork']?.front_default ||
+    null
+  );
 }
