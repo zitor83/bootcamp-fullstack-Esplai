@@ -2,20 +2,20 @@ import { obtenerListaLigeraPokemons, obtenerDetallesEvolucion } from './services
 import { transformarPokemons } from './utils/adapters.js';
 import { renderizarPokemons, mostrarCargando } from './ui/render.js';
 
-// --- 1. ESTADO GLOBAL DE LA APLICACIÓN ---
+// #### 1. ESTADO GLOBAL DE LA APLICACIÓN ####
 let paginaActual = 1;
 const pokemonsPorPagina = 24;
 let listaGlobalLigera = [];  //Guardará todos los nombres y URLs de los pokemon solamente.
 let listaFiltradaLigera = []; //Guarará los nombres que coincidan con el filtro de búsqueda, para luego paginar solo esos resultados.
 
-// --- 2. ELEMENTOS DEL DOM QUE VAMOS A UTILIZAR ---
+// #### 2. ELEMENTOS DEL DOM A UTILIZAR ####
 const btnAnterior = document.getElementById('btn-anterior');
 const btnSiguiente = document.getElementById('btn-siguiente');
 const inputBuscador = document.getElementById('search');
 const inputPagina = document.getElementById('input-pagina');
 const spanTotalPaginas = document.getElementById('total-paginas');
 
-// --- 3. LÓGICA DE PAGINACIÓN Y DESCARGA BAJO DEMANDA ---
+// #### 3. LÓGICA DE PAGINACIÓN Y DESCARGA BAJO DEMANDA ####
 async function actualizarPaginacion() {
     // Calculamos el total de páginas según la longitud de la lista filtrada.
     // Si no hay resultados, al menos habrá 1 página vacía gracias a Math.max. y Math.ceil se encargará de redondear hacia arriba.
@@ -53,7 +53,7 @@ async function actualizarPaginacion() {
     }
 }
 
-// --- 4. EVENTOS DE LOS BOTONES DE PAGINACIÓN ---
+// #### 4. EVENTOS DE LOS BOTONES DE PAGINACIÓN ####
 
 btnAnterior.addEventListener('click', () => {
     if (paginaActual > 1) {
@@ -70,7 +70,7 @@ btnSiguiente.addEventListener('click', () => {
     }
 });
 
-// --- 5. EVENTO CUANDO EL USUARIO ESCRIBE UNA PÁGINA CONCRETA ---
+// #### 5. EVENTO CUANDO EL USUARIO ESCRIBE UNA PÁGINA CONCRETA ####
 inputPagina.addEventListener('change', (evento) => {
     const totalPaginas = Math.max(1, Math.ceil(listaFiltradaLigera.length / pokemonsPorPagina));
     
@@ -90,7 +90,7 @@ inputPagina.addEventListener('change', (evento) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// --- 6. EVENTO DEL BUSCADOR ---
+// #### 6. EVENTO DEL BUSCADOR ####
 inputBuscador.addEventListener('input', (evento) => {
     const textoBusqueda = evento.currentTarget.value.toLowerCase();
 
@@ -104,7 +104,7 @@ inputBuscador.addEventListener('input', (evento) => {
     actualizarPaginacion();
 });
 
-// --- 6. ARRANQUE DE LA APLICACIÓN ---
+// #### 6. ARRANQUE DE LA APLICACIÓN ####
 async function iniciarRenderizado() {
     try {
         mostrarCargando();
