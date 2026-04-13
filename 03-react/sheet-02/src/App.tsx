@@ -1,4 +1,5 @@
 import "./App.css";
+import Panel from './components/ejercicio7/Panel';
 //import ModuleCard from "./components/ejercicio5/ModuleCard";
 // import CourseCard from "./components/ejercicio2/CourseCard";
 // import ProfileCard from "./components/ejercicio3/ProfileCard";
@@ -62,7 +63,28 @@ import "./App.css";
 function App() {
   return (
     <>
-     
+      <h1>Ejemplos de Composicion con Children</h1>
+      <Panel>
+        <h1>Ejemplo de Panel</h1>
+        <p>
+          Este es un ejemplo de composición utilizando el prop children en
+          React. El componente Panel actúa como un contenedor que puede envolver
+          cualquier contenido que se le pase como children. En este caso,
+          estamos pasando un párrafo como contenido dentro del Panel.
+        </p>
+      </Panel>
+      <Panel>
+        <ul>
+          <li>Elemento 1</li>
+          <li>Elemento 2</li>
+          <li>Elemento 3</li>
+        </ul>
+      </Panel>
+      <Panel>
+        <button type="button">Pulsame</button>
+        <input type="checkbox" name="consentimiento"  />
+        <p>Al pulsar doy mi consentimiento</p>
+      </Panel>
     </>
   );
 }
