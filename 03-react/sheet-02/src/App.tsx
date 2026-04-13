@@ -1,8 +1,8 @@
 import "./App.css";
-import ModuleCard from "./components/ejercicio5/ModuleCard";
+//import ModuleCard from "./components/ejercicio5/ModuleCard";
 // import CourseCard from "./components/ejercicio2/CourseCard";
 // import ProfileCard from "./components/ejercicio3/ProfileCard";
-// 
+// import TechCard from "./components/ejercicio4/TechCard";
 
 //EJERCICIO 2: Crea un componente CourseCard que reciba props para el título del curso, nivel, duración y un botón para ver más detalles.
 //Luego, utiliza este componente en tu App para mostrar una lista de cursos disponibles.
@@ -45,17 +45,24 @@ import ModuleCard from "./components/ejercicio5/ModuleCard";
 //       <TechCard name="Python" category="Lenguaje de programación" description="Un lenguaje de programación de alto nivel, fácil de aprender y versátil" />
 //     </article>
 //   );
+// function App() {
+//   return (
+//     <>
+//       <h1>Módulos del bootcamp</h1>
+//       <article className="module-grid">
+//         <ModuleCard name="Introducción a React" sessions={5} level="Básico" description="Aprende los fundamentos de React" />
+//         <ModuleCard name="Componentes en React" sessions={7} level="Intermedio" description="Descubre cómo crear componentes reutilizables" />
+//         <ModuleCard name="Hooks en React" sessions={8} level="Avanzado" description="Domina los hooks para gestionar el estado y los efectos secundarios" />
+//         <ModuleCard name="Estilos en React" sessions={4} level="Básico" description="Aprende a aplicar estilos en tus componentes de React" />
+//         <ModuleCard name="Estado y Props en React" sessions={6} level="Intermedio" description="Entiende cómo gestionar el estado y pasar props entre componentes" />
+//       </article>
+//     </>
+//   );
+// }
 function App() {
   return (
     <>
-      <h1>Módulos del bootcamp</h1>
-      <article className="module-grid">
-        <ModuleCard name="Introducción a React" sessions={5} level="Básico" description="Aprende los fundamentos de React" />
-        <ModuleCard name="Componentes en React" sessions={7} level="Intermedio" description="Descubre cómo crear componentes reutilizables" />
-        <ModuleCard name="Hooks en React" sessions={8} level="Avanzado" description="Domina los hooks para gestionar el estado y los efectos secundarios" />
-        <ModuleCard name="Estilos en React" sessions={4} level="Básico" description="Aprende a aplicar estilos en tus componentes de React" />
-        <ModuleCard name="Estado y Props en React" sessions={6} level="Intermedio" description="Entiende cómo gestionar el estado y pasar props entre componentes" />
-      </article>
+     
     </>
   );
 }
