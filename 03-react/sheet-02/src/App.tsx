@@ -1,5 +1,6 @@
 import "./App.css";
-import Panel from './components/ejercicio7/Panel';
+// import Panel from "./components/ejercicio7/Panel";
+import Curso from "./components/ejercicio9/Curso";
 //import ModuleCard from "./components/ejercicio5/ModuleCard";
 // import CourseCard from "./components/ejercicio2/CourseCard";
 // import ProfileCard from "./components/ejercicio3/ProfileCard";
@@ -60,31 +61,86 @@ import Panel from './components/ejercicio7/Panel';
 //     </>
 //   );
 // }
+// function App() {
+//   return (
+//     <>
+//       <h1>Ejemplos de Composicion con Children</h1>
+//       <Panel>
+//         <h1>Ejemplo de Panel</h1>
+//         <p>
+//           Este es un ejemplo de composición utilizando el prop children en
+//           React. El componente Panel actúa como un contenedor que puede envolver
+//           cualquier contenido que se le pase como children. En este caso,
+//           estamos pasando un párrafo como contenido dentro del Panel.
+//         </p>
+//       </Panel>
+//       <Panel>
+//         <ul>
+//           <li>Elemento 1</li>
+//           <li>Elemento 2</li>
+//           <li>Elemento 3</li>
+//         </ul>
+//       </Panel>
+//       <Panel>
+//         <button type="button">Pulsame</button>
+//         <input type="checkbox" name="consentimiento"  />
+//         <p>Al pulsar doy mi consentimiento</p>
+//       </Panel>
+//     </>
+//   );
 function App() {
   return (
     <>
-      <h1>Ejemplos de Composicion con Children</h1>
-      <Panel>
-        <h1>Ejemplo de Panel</h1>
-        <p>
-          Este es un ejemplo de composición utilizando el prop children en
-          React. El componente Panel actúa como un contenedor que puede envolver
-          cualquier contenido que se le pase como children. En este caso,
-          estamos pasando un párrafo como contenido dentro del Panel.
-        </p>
-      </Panel>
-      <Panel>
-        <ul>
-          <li>Elemento 1</li>
-          <li>Elemento 2</li>
-          <li>Elemento 3</li>
-        </ul>
-      </Panel>
-      <Panel>
-        <button type="button">Pulsame</button>
-        <input type="checkbox" name="consentimiento"  />
-        <p>Al pulsar doy mi consentimiento</p>
-      </Panel>
+      <h1>Título de sección</h1>
+      <p>
+        Este es un párrafo de ejemplo y describe el contenido de la sección.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, totam
+        iure deleniti atque quisquam aperiam voluptatibus saepe. Maxime aperiam
+        aut ipsam eos? At dolores est, dolore sequi laboriosam libero quis.
+      </p>
+
+      <Curso
+        title="Introducción a React"
+        level="Básico"
+        duration="4 semanas"
+        modality="Presencial"
+        textAction="Ver curso"
+      />
+      <Curso
+        title="Componentes en React"
+        level="Intermedio"
+        duration="6 semanas"
+        modality="Virtual"
+        textAction="Apúntate al curso"
+      />
+      <Curso
+        title="Hooks en React"
+        level="Avanzado"
+        duration="8 semanas"
+        modality="Presencial"
+        textAction="Inscribite al curso"
+      />
+      <Curso
+        title="Estado y Props en React"
+        level="Intermedio"
+        duration="5 semanas"
+        modality="Virtual"
+        textAction="Mira este curso"
+      />
+      <Curso
+        title="Estilos en React"
+        level="Básico"
+        duration="3 semanas"
+        modality="Presencial"
+        textAction="Apúntate a este curso"
+      />
+      <Curso
+        title="React Router"
+        level="Intermedio"
+        duration="4 semanas"
+        modality="Virtual"
+        textAction="Ven a este curso"
+      />
     </>
   );
 }
