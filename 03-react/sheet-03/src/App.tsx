@@ -1,8 +1,8 @@
-
 import "./App.css";
 import Sample from "./components/ejercicio-03/Sample";
 import ButtonHidden from "./components/ejercicio-04/ButtonHidden";
-//import Button from "./components/ejercicio-02/Button";
+import Button from "./components/ejercicio-02/Button";
+import Contador from "./components/ejercicio-05/Contador";
 
 //EJERCICIO 02: Crear un componente Button que tenga un estado valor, el cual se inicializa en 0. El componente debe mostrar el valor actual y un botón que al hacer click sume 1 al valor.
 // function App() {
@@ -13,7 +13,6 @@ import ButtonHidden from "./components/ejercicio-04/ButtonHidden";
 //   );
 // }
 
-
 //EJERCICIO 03: Corregir el código.
 // function App() {
 //   return (
@@ -23,10 +22,28 @@ import ButtonHidden from "./components/ejercicio-04/ButtonHidden";
 //   );
 // }
 
+//EJERCICIO 04: Crear un componente ButtonHidden.
+// function App() {
+//   return (
+//     <>
+//       <ButtonHidden />
+//     </>
+//   );
+// }
+
+//EJERCICIO 05: Crear un componente Contador con tres botones.
+// function App() {
+//   return (
+//     <>
+//       <Contador />
+//     </>
+//   );
+// }
+
 function App() {
   return (
     <>
-      <ButtonHidden />
+      <Contador />
     </>
   );
 }
