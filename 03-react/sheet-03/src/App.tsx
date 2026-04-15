@@ -4,6 +4,7 @@ import ButtonHidden from "./components/ejercicio-04/ButtonHidden";
 import Button from "./components/ejercicio-02/Button";
 import Contador from "./components/ejercicio-05/Contador";
 import Text from "./components/ejercicio-06/Text";
+import SamplePlusThree from "./components/ejercicio-08/SamplePlusThree";
 //EJERCICIO 02: Crear un componente Button que tenga un estado valor, el cual se inicializa en 0. El componente debe mostrar el valor actual y un botón que al hacer click sume 1 al valor.
 // function App() {
 //   return (
@@ -40,10 +41,17 @@ import Text from "./components/ejercicio-06/Text";
 //   );
 // }
 
+// function App() {
+//   return (
+//     <>
+//      <Text />
+//     </>
+//   );
+// }
 function App() {
   return (
     <>
-     <Text />
+      <SamplePlusThree />
     </>
   );
 }
