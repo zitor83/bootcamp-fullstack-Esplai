@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function FormValidation() {
-    const [email, setEmail] = React.useState("");
+    const [email, setEmail] =useState("");
     const [name, setName] = React.useState("");
-    const [error, setError] = React.useState("");
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {        e.preventDefault();
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {        e.preventDefault();
         if (name.trim() === "") {
             setError("El nombre no pude estar vacio.");
             return;
