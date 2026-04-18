@@ -4,6 +4,7 @@ import SampleAccess from "./components/ex03/SampleAccess";
 import TextAreaComponent from "./components/ex04/TextAreaComponent";
 import FormValidation from "./components/ex05/FormValidation";
 import ConfirmCheckbox from "./components/ex06/ConfirmCheckbox";
+import FichaEditable from "./components/ex07/FichaEditable";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <TextAreaComponent />
       <FormValidation />
       <ConfirmCheckbox />
+      <FichaEditable />
     </>
   );
 }
