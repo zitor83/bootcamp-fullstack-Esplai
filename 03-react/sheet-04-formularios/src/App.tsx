@@ -6,6 +6,7 @@ import FormValidation from "./components/ex05/FormValidation";
 import ConfirmCheckbox from "./components/ex06/ConfirmCheckbox";
 import FichaEditable from "./components/ex07/FichaEditable";
 import InscripcionSencilla from "./components/ex09/InscripcionSencilla";
+import BotonBloqueado from "./components/ex11/BotonBloqueado";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <ConfirmCheckbox />
       <FichaEditable />
       <InscripcionSencilla />
+      <BotonBloqueado />
     </>
   );
 }
