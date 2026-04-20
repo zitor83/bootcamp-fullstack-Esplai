@@ -7,7 +7,7 @@ export interface PokemonBase {
   url: string;
 }
 
-const POKEMONS_POR_PAGINA = 24;
+const POKEMONS_BY_PAGE = 24;
 
 function App() {
   // 1. Estado para la lista global de Pokémon  (sin filtrar). Aqui le paso un generico para decirle que es un array de PokemonBase, y el estado inicia como un array vacio.
@@ -28,7 +28,7 @@ function App() {
   // USE EFFECT PARA CARGAR LA LISTA GLOBAL DE POKEMONES AL INICIAR LA APLICACION
   useEffect(() => {
     //Definimos la función asíncrona dentro del useEffect para cargar la lista global de Pokémon al iniciar la aplicación.
-    const fetchListaInicial = async () => {
+    const fetchInitialList = async () => {
       setLoading(true);
       try {
         const response = await fetch(
@@ -47,7 +47,7 @@ function App() {
 
     // Llamamos a la función para cargar la lista global de Pokémon al iniciar la aplicación.
     // Al pasar un array vacío como segundo argumento, este useEffect solo se ejecutará una vez al montar el componente, lo que es ideal para cargar datos iniciales.
-    fetchListaInicial();
+    fetchInitialList();
   }, []);
 
   // ==========================================
@@ -55,14 +55,14 @@ function App() {
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda
-  const listaFiltrada = GlobalList.filter((pokemon) =>
+  const filteredList = GlobalList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(query.toLowerCase()),
   );
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
-  const totalPaginas = Math.max(
+  const pageTotal = Math.max(
     1,
-    Math.ceil(listaFiltrada.length / POKEMONS_POR_PAGINA),
+    Math.ceil(filteredList.length / POKEMONS_BY_PAGE),
   );
 
   return (
