@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
-
-// Definimos la interfaz para los datos básicos de un Pokémon (nombre y URL)
-export interface PokemonBase {
-  name: string;
-  url: string;
-}
+import type { PokemonBase } from "./types/pokemon";
 
 const POKEMONS_BY_PAGE = 24;
 
 function App() {
   // 1. Estado para la lista global de Pokémon  (sin filtrar). Aqui le paso un generico para decirle que es un array de PokemonBase, y el estado inicia como un array vacio.
-  const [GlobalList, setGlobalList] = useState<PokemonBase[]>([]);
+  const [globalList, setGlobalList] = useState<PokemonBase[]>([]);
 
   // 2. Estado para el texto de búsqueda que el usuario ingresa para filtrar la lista global
   const [query, setQuery] = useState("");
@@ -55,7 +50,7 @@ function App() {
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda
-  const filteredList = GlobalList.filter((pokemon) =>
+  const filteredList = globalList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(query.toLowerCase()),
   );
 
@@ -77,7 +72,7 @@ function App() {
       {loading ? (
         <p>Cargando...</p>
       ) : (
-        <p>Total Pokemons cargados: {GlobalList.length}</p>
+        <p>Total Pokemons cargados: {globalList.length}</p>
       )}
     </main>
   );
