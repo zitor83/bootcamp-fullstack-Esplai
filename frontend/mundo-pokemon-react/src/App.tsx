@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SearchBar from "./components/SearchBar";
 
 // Definimos la interfaz para los datos básicos de un Pokémon (nombre y URL)
 export interface PokemonBase {
@@ -10,25 +11,25 @@ const POKEMONS_POR_PAGINA = 24;
 
 function App() {
   // 1. Estado para la lista global de Pokémon  (sin filtrar). Aqui le paso un generico para decirle que es un array de PokemonBase, y el estado inicia como un array vacio.
-  const [listaGlobal, setListaGlobal] = useState<PokemonBase[]>([]);
+  const [GlobalList, setGlobalList] = useState<PokemonBase[]>([]);
 
   // 2. Estado para el texto de búsqueda que el usuario ingresa para filtrar la lista global
-  const [busqueda, setBusqueda] = useState("");
+  const [query, setQuery] = useState("");
 
   // 3. Estado para la página actual que el usuario está viendo (inicia en 1)
-  const [paginaActual, setPaginaActual] = useState(1);
+  const [currentPage, setcurrentPage] = useState(1);
 
   // 4. Estado para los detalles de los Pokémon de la página actual.
-  const [pokemonsEnPantalla, setPokemonsEnPantalla] = useState<any[]>([]);
+  const [pokemonsInPage, setPokemonsInPage] = useState<any[]>([]);
 
   // 5. Estado para controlar la pantalla de carga
-  const [cargando, setCargando] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // USE EFFECT PARA CARGAR LA LISTA GLOBAL DE POKEMONES AL INICIAR LA APLICACION
   useEffect(() => {
     //Definimos la función asíncrona dentro del useEffect para cargar la lista global de Pokémon al iniciar la aplicación.
     const fetchListaInicial = async () => {
-      setCargando(true);
+      setLoading(true);
       try {
         const response = await fetch(
           "https://pokeapi.co/api/v2/pokemon?limit=-1",
@@ -36,11 +37,11 @@ function App() {
         const data = await response.json();
 
         // Guardamos la lista global de Pokémon en el estado. El resultado en data.results es un array de objetos con name y url.
-        setListaGlobal(data.results);
+        setGlobalList(data.results);
       } catch (error) {
         console.error("Error al cargar la lista de Pokémon:", error);
       } finally {
-        setCargando(false);
+        setLoading(false);
       }
     };
 
@@ -54,8 +55,8 @@ function App() {
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda
-  const listaFiltrada = listaGlobal.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(busqueda.toLowerCase()),
+  const listaFiltrada = GlobalList.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(query.toLowerCase()),
   );
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
@@ -66,12 +67,17 @@ function App() {
 
   return (
     <main>
-      <h1>Pokédex</h1>
-      {/* Inyecta los componentes aquí */}
-      {cargando ? (
+      <SearchBar
+        value={query}
+        onChange={(newText) => {
+          setQuery(newText);
+          setcurrentPage(1);
+        }}
+      />
+      {loading ? (
         <p>Cargando...</p>
       ) : (
-        <p>Total Pokemons cargados: {listaGlobal.length}</p>
+        <p>Total Pokemons cargados: {GlobalList.length}</p>
       )}
     </main>
   );
