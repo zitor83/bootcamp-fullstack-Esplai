@@ -53,9 +53,13 @@ function App() {
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda
-  const filteredList = useMemo(() => globalList.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(query.toLowerCase()),
-  ), [globalList, query]); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda. Esto evita un loop infinito de renderizados.  
+  const filteredList = useMemo(
+    () =>
+      globalList.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(query.toLowerCase()),
+      ),
+    [globalList, query],
+  ); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda. Esto evita un loop infinito de renderizados.
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
   const pageTotal = Math.max(
