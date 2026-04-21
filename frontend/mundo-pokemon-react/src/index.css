@@ -293,9 +293,15 @@ body::after {
     transform: scale(1.1); /* Hace un pequeño zoom al hacer click */
 }
 
-/* Magia oscura de CSS para ocultar las flechitas del input de número */
-#input-pagina::-webkit-inner-spin-button, 
-#input-pagina::-webkit-outer-spin-button { 
-    appearance: none; 
-    margin: 0; 
+
+/* Ocultar las flechas (spinners) del input number en Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* Ocultar las flechas (spinners) del input number en Firefox */
+input[type="number"] {
+  appearance: textfield;
 }
