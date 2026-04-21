@@ -7,10 +7,10 @@ export interface PokemonBase {
 
 // Definimos la interfaz para los datos extendidos de un Pokémon
 export interface PokemonDetail {
-    id: number;
-    name: string;
-    image: string;
-    types: string[];
-    evolvesFrom: string | null;
+  id: number;
+  name: string;
+  image: string;
+  types: string[];
+  evolvesFrom: string | null;
 }
 
