@@ -5,10 +5,10 @@ import type { PokemonDetail } from "../types/pokemon";
 // Función para adaptar las URLs de las imágenes de los pokémon, intentando obtener la mejor calidad disponible.
 export function adaptSpriteUrls(sprites: any): string {
     return (
+        sprites?.other?.['official-artwork']?.front_default ||
         sprites?.front_default ||
         sprites?.front_shiny ||
         sprites?.other?.home?.front_default ||
-        sprites?.other?.['official-artwork']?.front_default ||
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
     );
 }
