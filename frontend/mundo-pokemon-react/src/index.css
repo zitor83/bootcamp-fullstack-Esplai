@@ -1,0 +1,301 @@
+/* VARIABLES GENERALES */
+:root {
+    /* Colores */
+    --color-primary: #ffe628;
+    --color-secondary: #dcdcdc;
+    --color-terciary: #e62828;
+    --color-text: #2c2c2c;
+
+    /* Espaciado */
+    --spacing-small: 0.5rem;
+    --spacing-medium: 1rem;
+    --spacing-large: 2rem;
+    --spacing-extra-large: 4rem;
+
+    /* Bordes y sombras */
+    --radius-sm: 2px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --shadow-card: 0 4px 10px rgb(0 0 0 / 15%);
+}
+
+/* RESETEO BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Ubuntu, sans-serif;
+    background-color: var(--color-primary);
+    color: var(--color-text);
+    line-height: 1.5;
+    padding: var(--spacing-large);
+}
+
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+
+/* ESTILOS DE LOS COMPONENTES */
+.search-bar {
+    width: 100%;
+    margin-bottom: var(--spacing-medium);
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar form {
+    width: 100%;    /* Para que ocupe todo el ancho disponible */
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background-color: white;
+    box-shadow: var(--shadow-card);
+    font-family: inherit;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    text-align: center;    /* Centramos el texto y el placeholder como en la foto */
+    transition: outline 0.2s ease, transform 0.2s ease;
+}
+
+.search-bar input:focus-visible {
+    outline: 2px solid var(--color-terciary);    /* Un borde rojo estilo Pokémon */
+    outline-offset: 2px;
+    transform: scale(1.02);    /* Crece un poco para tomar protagonismo */
+}
+
+.search-bar input::placeholder {
+    color: #ccc;
+}
+
+.pokemon-grid {
+    display: grid;
+    width: 100%;    /* La magia responsive ocurre aquí: */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-medium);
+}
+
+.pokemon-card {
+    background-color: white;
+    box-shadow: var(--shadow-card);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    animation: fade-in-up 0.5s ease both;
+    display: grid;
+    grid-template-rows: auto 1fr;  
+}
+
+.pokemon-card:hover {
+    /* Novedad: Desplazamiento corto hacia arriba y sombra más amplia [cite: 494, 495] */
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgb(0 0 0 / 20%);
+}
+
+.pokemon-card .pokemon-image-container {
+    background-color: var(--color-secondary);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon-card .pokemon-image-container img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    animation: fade-in-up 2s ease both;
+}
+
+.pokemon-card .pokemon-image-container .pokemon-id {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #cdcdc8;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    color: #555;
+    font-weight: bold;
+}
+
+.pokemon-card .pokemon-info {
+    padding: 1rem;
+}
+
+.pokemon-card .pokemon-info .pokemon-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.pokemon-name::first-letter {
+    text-transform: uppercase; /* Solo la primera letra en mayúscula */
+}
+
+.pokemon-card .pokemon-info .pokemon-types {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+}
+
+/* Las píldoras de los tipos */
+.pokemon-card .pokemon-info .pokemon-types li {
+    font-size: 0.65rem;
+    list-style: none;
+    border: 1px solid var(--color-secondary);
+    color: #777;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    background-color: #f8f8f7d5;
+}
+
+.pokemon-evolution-from {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+    border-left: 3px solid #8b4513;    /* Barrita vertical marrón */
+    padding-left: 0.5rem;
+    line-height: 1.2;
+    text-transform: lowercase;
+}
+
+.pokemon-evolution-from::first-letter {
+    text-transform: uppercase;    /* Solo la primera letra en mayúscula */
+}
+
+/* =========================================
+   DECORACIONES DE FONDO (Fijas a la pantalla)
+   ========================================= */
+
+/* 1. CUADRADOS ROTADOS (Triángulos negros superiores) */
+html::before,
+html::after {
+    content: '';
+    position: fixed;    /* Los ancla a la ventana del navegador */
+    top: -40px;
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-text);
+    transform: rotate(45deg);    /* Girarlos 45 grados */
+    z-index: -1;    /* Los envía detrás de todo */
+}
+
+/* Cuadrado Izquierdo */
+html::before {
+    left: -40px;
+}
+
+/* Cuadrado Derecho */
+html::after {
+    right: -40px;
+}
+
+/* 2. CÍRCULOS ROJOS INFERIORES */
+body::before,
+body::after {
+    content: '';
+    position: fixed;    /* Los ancla a la ventana del navegador */
+    bottom: -75px;
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-terciary);
+    border-radius: 50%;    /* Los hace redondos */
+    z-index: -1;    /* Los envía detrás de todo */
+}
+
+/* Círculo Izquierdo */
+body::before {
+    left: -75px;
+}
+
+/* Círculo Derecho */
+body::after {
+    right: -75px;
+}
+
+/* =========================================
+   ANIMACIONES PARA LOS POKÉMON 
+   ========================================= */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ESTILOS PARA EL MENSAJE DE CARGA */
+.contenedor-carga {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: var(--spacing-large) 0;
+}
+
+.gif-carga {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.mensaje-carga {
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #b42929;
+    grid-column: 1 / -1; /* Para que ocupe todo el ancho del grid */
+}
+
+/* =========================================
+   INPUT DE PAGINACIÓN
+   ========================================= */
+.info-paginacion {
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#input-pagina {
+    width: 60px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: bold;
+    padding: 0.3rem;
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+
+#input-pagina:focus {
+    border-color: var(--color-terciary);
+    transform: scale(1.1); /* Hace un pequeño zoom al hacer click */
+}
+
+/* Magia oscura de CSS para ocultar las flechitas del input de número */
+#input-pagina::-webkit-inner-spin-button, 
+#input-pagina::-webkit-outer-spin-button { 
+    appearance: none; 
+    margin: 0; 
+}
