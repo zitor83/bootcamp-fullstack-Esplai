@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 // Interface con los props que recibe el componente Pagination
 interface PaginationProps {
   currentPage: number;
@@ -15,6 +17,26 @@ function Pagination({
   onNext,
   onPageChange,
 }: PaginationProps) {
+  // Estado local para almacenar lo que el usuario esta escribiendo temporalmente en el input de numero de pagina.
+  const [inputValue, setInputValue] = useState(() => currentPage.toString());
+
+  //Sincronizar el input si la pagina cambia por otros medios (por ejemplo, con los botones de siguiente/anterior)
+  useEffect(() => {
+    setInputValue(currentPage.toString());
+  }, [currentPage]);
+
+  // Función para manejar el evento de ir a una página específica cuando el usuario presiona Enter o cambia el valor del input
+  const handleGoToPage = () => {
+    const newPage = parseInt(inputValue);
+
+    // Validamos que el nuevo número de página sea un número válido y esté dentro del rango permitido
+    if (!isNaN(newPage) && newPage >= 1 && newPage <= totalPages) {
+      onPageChange(newPage);
+    } else {
+      setInputValue(currentPage.toString()); // Si el valor no es válido, restablecemos el input al número de página actual
+    }
+  };
+
   return (
     // Sección de paginación con botones para navegar entre páginas y un input para ir a una página específica
     <section className="pagination">
@@ -28,19 +50,19 @@ function Pagination({
       </button>
 
       {/* Información de la página actual y un input para cambiar directamente a una página específica */}
-      <span className="info-pagination">
+      <span className="info-paginacion">
         Página
         <input
           type="number"
-          value={currentPage}
+          value={inputValue}
           min="1"
           max={totalPages}
-          onChange={(e) => {
-            const newPage = parseInt(e.target.value);
-            if (!isNaN(newPage) && newPage >= 1 && newPage <= totalPages) {
-              onPageChange(newPage);
-            } else {
-              onPageChange(currentPage); // Si el valor no es válido, mantenemos la página actual
+          title="Escribe un número y pulsa Enter"
+          onChange={(e) => setInputValue(e.target.value)} // Solo actualiza el estado local
+          onBlur={handleGoToPage} // Dispara la búsqueda al hacer clic fuera del input
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleGoToPage(); // Dispara la búsqueda al pulsar Enter
             }
           }}
         />
