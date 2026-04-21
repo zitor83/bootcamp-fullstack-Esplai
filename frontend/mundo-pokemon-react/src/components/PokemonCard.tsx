@@ -13,6 +13,7 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
     <article className="pokemon-card">
       <div className="pokemon-image-container">
         <img src={pokemon.image} alt={pokemon.name} />
+        <div className="pokemon-id">ID / {pokemon.id}</div>
       </div>
 
       <div className="pokemon-info">
