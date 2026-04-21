@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import type { PokemonBase, PokemonDetail } from "./types/pokemon";
 import { getPokemonDetails } from "./services/api";
 import PokemonGrid from "./components/PokemonGrid";
+import Pagination from "./components/Pagination";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -52,9 +53,9 @@ function App() {
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda
-  const filteredList = globalList.filter((pokemon) =>
+  const filteredList = useMemo(() => globalList.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(query.toLowerCase()),
-  );
+  ), [globalList, query]); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda. Esto evita un loop infinito de renderizados.  
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
   const pageTotal = Math.max(
@@ -65,28 +66,32 @@ function App() {
   // 1. Matemáticas para cortar la porción de 24 Pokémon (ESTADO DERIVADO)
   const startIndex = (currentPage - 1) * POKEMONS_BY_PAGE;
   const endIndex = startIndex + POKEMONS_BY_PAGE;
-  const currentSlice = filteredList.slice(startIndex, endIndex);
 
-  // 2. NUEVO USE EFFECT: Descarga los detalles cuando cambia la página o la búsqueda
+  // Este es el array de Pokémon que corresponde a la página actual, pero solo con name y url.
+  const currentSlice = useMemo(
+    () => filteredList.slice(startIndex, endIndex),
+    [filteredList, startIndex, endIndex],
+  ); // IMPORTANTE: Usamos useMemo para memorizar el resultado del slice y solo recalcularlo cuando cambie la lista filtrada o los índices. Esto evita un loop infinito de renderizados.
+
+  // 2. Descarga los detalles cuando cambia la página o la búsqueda
   useEffect(() => {
-    // Si no hay Pokémon en este trozo (por ejemplo, si la búsqueda no dio resultados), vaciamos la pantalla y salimos
-    if (currentSlice.length === 0) {
-      setPokemonsInPage([]);
-      return;
-    }
-
     const fetchCurrentPageDetails = async () => {
+      // Si no hay Pokémon en este trozo (por ejemplo, si la búsqueda no dio resultados), vaciamos la pantalla y salimos
+      if (currentSlice.length === 0) {
+        setPokemonsInPage([]);
+        return;
+      }
       setLoading(true);
       try {
         // Mapeamos el trozo para crear un array de promesas
-        const promises = currentSlice.map((pokemon) =>
+        const PokemonsInPagePromises = currentSlice.map((pokemon) =>
           getPokemonDetails(pokemon.url),
         );
         // Esperamos a que TODAS las promesas de los 24 pokémon terminen
-        const details = await Promise.all(promises);
+        const pokemonInPageDetails = await Promise.all(PokemonsInPagePromises);
 
         // Guardamos los detalles completos en el estado
-        setPokemonsInPage(details);
+        setPokemonsInPage(pokemonInPageDetails);
       } catch (error) {
         console.error("Error cargando los detalles:", error);
       } finally {
@@ -95,7 +100,7 @@ function App() {
     };
 
     fetchCurrentPageDetails();
-  }, [currentPage, query, globalList.length]); // IMPORTANTE: Este efecto se dispara si cambia la página, el texto de búsqueda, o cuando la lista global se carga.
+  }, [currentSlice]); // IMPORTANTE: Este efecto se dispara si cambia la página, el texto de búsqueda, o cuando la lista global se carga.
 
   return (
     <main>
@@ -108,6 +113,15 @@ function App() {
       />
 
       {loading ? <p>Cargando...</p> : <PokemonGrid pokemons={pokemonsInPage} />}
+      {!loading && pageTotal > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={pageTotal}
+          onPrevious={() => setcurrentPage((prev) => prev - 1)}
+          onNext={() => setcurrentPage((prev) => prev + 1)}
+          onPageChange={(newPage) => setcurrentPage(newPage)}
+        />
+      )}
     </main>
   );
 }
