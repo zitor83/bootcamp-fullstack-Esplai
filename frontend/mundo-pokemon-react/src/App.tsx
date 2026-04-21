@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
-import type { PokemonBase } from "./types/pokemon";
+import type { PokemonBase, PokemonDetail } from "./types/pokemon";
 import { getPokemonDetails } from "./services/api";
 import PokemonGrid from "./components/PokemonGrid";
 
@@ -17,7 +17,7 @@ function App() {
   const [currentPage, setcurrentPage] = useState(1);
 
   // 4. Estado para los detalles de los Pokémon de la página actual.
-  const [pokemonsInPage, setPokemonsInPage] = useState<any[]>([]);
+  const [pokemonsInPage, setPokemonsInPage] = useState<PokemonDetail[]>([]);
 
   // 5. Estado para controlar la pantalla de carga
   const [loading, setLoading] = useState(false);
@@ -79,10 +79,12 @@ function App() {
       setLoading(true);
       try {
         // Mapeamos el trozo para crear un array de promesas
-        const promises = currentSlice.map(pokemon => getPokemonDetails(pokemon.url));
+        const promises = currentSlice.map((pokemon) =>
+          getPokemonDetails(pokemon.url),
+        );
         // Esperamos a que TODAS las promesas de los 24 pokémon terminen
         const details = await Promise.all(promises);
-        
+
         // Guardamos los detalles completos en el estado
         setPokemonsInPage(details);
       } catch (error) {
@@ -97,7 +99,6 @@ function App() {
 
   return (
     <main>
-      
       <SearchBar
         value={query}
         onChange={(newText) => {
@@ -105,12 +106,8 @@ function App() {
           setcurrentPage(1); // Reset de página al buscar
         }}
       />
-      
-      {loading ? (
-        <p>Cargando...</p>
-      ) : (
-        <PokemonGrid pokemons={pokemonsInPage} />
-      )}
+
+      {loading ? <p>Cargando...</p> : <PokemonGrid pokemons={pokemonsInPage} />}
     </main>
   );
 }
