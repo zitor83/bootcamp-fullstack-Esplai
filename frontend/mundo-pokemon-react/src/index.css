@@ -51,7 +51,9 @@ main {
 }
 
 .search-bar form {
-    width: 100%;    /* Para que ocupe todo el ancho disponible */
+    width: 100%;
+
+    /* Para que ocupe todo el ancho disponible */
 }
 
 .search-bar input {
@@ -63,14 +65,20 @@ main {
     font-family: inherit;
     font-size: 1.1rem;
     color: var(--color-text);
-    text-align: center;    /* Centramos el texto y el placeholder como en la foto */
+    text-align: center;
+
+    /* Centramos el texto y el placeholder como en la foto */
     transition: outline 0.2s ease, transform 0.2s ease;
 }
 
 .search-bar input:focus-visible {
-    outline: 2px solid var(--color-terciary);    /* Un borde rojo estilo Pokémon */
+    outline: 2px solid var(--color-terciary);
+
+    /* Un borde rojo estilo Pokémon */
     outline-offset: 2px;
-    transform: scale(1.02);    /* Crece un poco para tomar protagonismo */
+    transform: scale(1.02);
+
+    /* Crece un poco para tomar protagonismo */
 }
 
 .search-bar input::placeholder {
@@ -79,7 +87,9 @@ main {
 
 .pokemon-grid {
     display: grid;
-    width: 100%;    /* La magia responsive ocurre aquí: */
+    width: 100%;
+
+    /* La magia responsive ocurre aquí: */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-medium);
 }
@@ -93,7 +103,7 @@ main {
     cursor: pointer;
     animation: fade-in-up 0.5s ease both;
     display: grid;
-    grid-template-rows: auto 1fr;  
+    grid-template-rows: auto 1fr;
 }
 
 .pokemon-card:hover {
@@ -139,7 +149,9 @@ main {
 }
 
 .pokemon-name::first-letter {
-    text-transform: uppercase; /* Solo la primera letra en mayúscula */
+    text-transform: uppercase;
+
+    /* Solo la primera letra en mayúscula */
 }
 
 .pokemon-card .pokemon-info .pokemon-types {
@@ -164,14 +176,18 @@ main {
     margin-top: 1rem;
     font-size: 0.85rem;
     color: #666;
-    border-left: 3px solid #8b4513;    /* Barrita vertical marrón */
+    border-left: 3px solid #8b4513;
+
+    /* Barrita vertical marrón */
     padding-left: 0.5rem;
     line-height: 1.2;
     text-transform: lowercase;
 }
 
 .pokemon-evolution-from::first-letter {
-    text-transform: uppercase;    /* Solo la primera letra en mayúscula */
+    text-transform: uppercase;
+
+    /* Solo la primera letra en mayúscula */
 }
 
 /* =========================================
@@ -182,13 +198,19 @@ main {
 html::before,
 html::after {
     content: '';
-    position: fixed;    /* Los ancla a la ventana del navegador */
+    position: fixed;
+
+    /* Los ancla a la ventana del navegador */
     top: -40px;
     width: 80px;
     height: 80px;
     background-color: var(--color-text);
-    transform: rotate(45deg);    /* Girarlos 45 grados */
-    z-index: -1;    /* Los envía detrás de todo */
+    transform: rotate(45deg);
+
+    /* Girarlos 45 grados */
+    z-index: -1;
+
+    /* Los envía detrás de todo */
 }
 
 /* Cuadrado Izquierdo */
@@ -205,13 +227,19 @@ html::after {
 body::before,
 body::after {
     content: '';
-    position: fixed;    /* Los ancla a la ventana del navegador */
+    position: fixed;
+
+    /* Los ancla a la ventana del navegador */
     bottom: -75px;
     width: 150px;
     height: 150px;
     background-color: var(--color-terciary);
-    border-radius: 50%;    /* Los hace redondos */
-    z-index: -1;    /* Los envía detrás de todo */
+    border-radius: 50%;
+
+    /* Los hace redondos */
+    z-index: -1;
+
+    /* Los envía detrás de todo */
 }
 
 /* Círculo Izquierdo */
@@ -259,7 +287,9 @@ body::after {
     text-align: center;
     font-size: 1.2rem;
     color: #b42929;
-    grid-column: 1 / -1; /* Para que ocupe todo el ancho del grid */
+    grid-column: 1 / -1;
+
+    /* Para que ocupe todo el ancho del grid */
 }
 
 /* =========================================
@@ -290,18 +320,20 @@ body::after {
 
 #input-pagina:focus {
     border-color: var(--color-terciary);
-    transform: scale(1.1); /* Hace un pequeño zoom al hacer click */
+    transform: scale(1.1);
+
+    /* Hace un pequeño zoom al hacer click */
 }
 
 
 /* Ocultar las flechas (spinners) del input number en Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  appearance: none;
-  margin: 0;
+    appearance: none;
+    margin: 0;
 }
 
 /* Ocultar las flechas (spinners) del input number en Firefox */
 input[type="number"] {
-  appearance: textfield;
+    appearance: textfield;
 }
