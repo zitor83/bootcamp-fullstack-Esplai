@@ -4,6 +4,7 @@ import type { PokemonBase, PokemonDetail } from "./types/pokemon";
 import { getPokemonDetails } from "./services/api";
 import PokemonGrid from "./components/PokemonGrid";
 import Pagination from "./components/Pagination";
+import Loader from "./components/Loader";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -116,7 +117,7 @@ function App() {
         }}
       />
 
-      {loading ? <p>Cargando...</p> : <PokemonGrid pokemons={pokemonsInPage} />}
+      {loading ? <Loader /> : <PokemonGrid pokemons={pokemonsInPage} />}
       {!loading && pageTotal > 0 && (
         <Pagination
           currentPage={currentPage}

@@ -50,7 +50,7 @@ function Pagination({
       </button>
 
       {/* Información de la página actual y un input para cambiar directamente a una página específica */}
-      <span className="info-paginacion">
+      <span className="pagination-info">
         Página
         <input
           type="number"
@@ -58,6 +58,7 @@ function Pagination({
           min="1"
           max={totalPages}
           title="Escribe un número y pulsa Enter"
+          className="pagination-input"
           onChange={(e) => setInputValue(e.target.value)} // Solo actualiza el estado local
           onBlur={handleGoToPage} // Dispara la búsqueda al hacer clic fuera del input
           onKeyDown={(e) => {

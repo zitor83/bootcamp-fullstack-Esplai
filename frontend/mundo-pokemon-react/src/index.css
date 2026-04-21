@@ -268,21 +268,24 @@ body::after {
 }
 
 /* ESTILOS PARA EL MENSAJE DE CARGA */
-.contenedor-carga {
+.loader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     padding: var(--spacing-large) 0;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.gif-carga {
+.loader-gif {
     width: 70%;
     height: 70%;
     object-fit: contain;
 }
 
-.mensaje-carga {
+.loader-message {
     width: 100%;
     text-align: center;
     font-size: 1.2rem;
@@ -295,7 +298,15 @@ body::after {
 /* =========================================
    INPUT DE PAGINACIÓN
    ========================================= */
-.info-paginacion {
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: var(--spacing-large);
+}
+
+.pagination-info {
     font-weight: 500;
     font-size: 1.1rem;
     color: var(--color-text);
@@ -304,7 +315,7 @@ body::after {
     gap: 0.5rem;
 }
 
-#input-pagina {
+.pagination-input {
     width: 60px;
     text-align: center;
     font-size: 1.1rem;
@@ -318,7 +329,7 @@ body::after {
 }
 
 
-#input-pagina:focus {
+.pagination-input:focus {
     border-color: var(--color-terciary);
     transform: scale(1.1);
 
