@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import type { PokemonBase } from "./types/pokemon";
+import { getPokemonDetails } from "./services/api";
+import PokemonGrid from "./components/PokemonGrid";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -60,19 +62,54 @@ function App() {
     Math.ceil(filteredList.length / POKEMONS_BY_PAGE),
   );
 
+  // 1. Matemáticas para cortar la porción de 24 Pokémon (ESTADO DERIVADO)
+  const startIndex = (currentPage - 1) * POKEMONS_BY_PAGE;
+  const endIndex = startIndex + POKEMONS_BY_PAGE;
+  const currentSlice = filteredList.slice(startIndex, endIndex);
+
+  // 2. NUEVO USE EFFECT: Descarga los detalles cuando cambia la página o la búsqueda
+  useEffect(() => {
+    // Si no hay Pokémon en este trozo (por ejemplo, si la búsqueda no dio resultados), vaciamos la pantalla y salimos
+    if (currentSlice.length === 0) {
+      setPokemonsInPage([]);
+      return;
+    }
+
+    const fetchCurrentPageDetails = async () => {
+      setLoading(true);
+      try {
+        // Mapeamos el trozo para crear un array de promesas
+        const promises = currentSlice.map(pokemon => getPokemonDetails(pokemon.url));
+        // Esperamos a que TODAS las promesas de los 24 pokémon terminen
+        const details = await Promise.all(promises);
+        
+        // Guardamos los detalles completos en el estado
+        setPokemonsInPage(details);
+      } catch (error) {
+        console.error("Error cargando los detalles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrentPageDetails();
+  }, [currentPage, query, globalList.length]); // IMPORTANTE: Este efecto se dispara si cambia la página, el texto de búsqueda, o cuando la lista global se carga.
+
   return (
     <main>
+      
       <SearchBar
         value={query}
         onChange={(newText) => {
           setQuery(newText);
-          setcurrentPage(1);
+          setcurrentPage(1); // Reset de página al buscar
         }}
       />
+      
       {loading ? (
         <p>Cargando...</p>
       ) : (
-        <p>Total Pokemons cargados: {globalList.length}</p>
+        <PokemonGrid pokemons={pokemonsInPage} />
       )}
     </main>
   );
