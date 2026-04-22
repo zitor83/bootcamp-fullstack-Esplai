@@ -6,6 +6,7 @@ import PokemonGrid from "./components/PokemonGrid";
 import Pagination from "./components/Pagination";
 import Loader from "./components/Loader";
 import NoResults from "./components/NoResults";
+import ErrorMessage from "./components/ErrorMessage";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -25,11 +26,16 @@ function App() {
   // 5. Estado para controlar la pantalla de carga
   const [loading, setLoading] = useState(false);
 
+  // 6. Estado para el mensaje de error
+  const [error, setError] = useState<string | null>(null);
+
+
   // USE EFFECT PARA CARGAR LA LISTA GLOBAL DE POKEMONES AL INICIAR LA APLICACION
   useEffect(() => {
     //Definimos la función asíncrona dentro del useEffect para cargar la lista global de Pokémon al iniciar la aplicación.
     const fetchInitialList = async () => {
       setLoading(true);
+      setError(null); // Reseteamos el error antes de intentar cargar la lista
       try {
         const response = await fetch(
           "https://pokeapi.co/api/v2/pokemon?limit=-1",
@@ -40,6 +46,7 @@ function App() {
         setGlobalList(data.results);
       } catch (error) {
         console.error("Error al cargar la lista de Pokémon:", error);
+        setError("¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.");
       } finally {
         setLoading(false);
       }
@@ -83,6 +90,7 @@ function App() {
   useEffect(() => {
     const fetchCurrentPageDetails = async () => {
       // Si no hay Pokémon en este trozo (por ejemplo, si la búsqueda no dio resultados), vaciamos la pantalla y salimos
+      setError(null); // Reseteamos el error antes de intentar cargar los detalles
       if (currentSlice.length === 0) {
         setPokemonsInPage([]);
         return;
@@ -100,6 +108,7 @@ function App() {
         setPokemonsInPage(pokemonInPageDetails);
       } catch (error) {
         console.error("Error cargando los detalles:", error);
+        setError("¡No se pudieron cargar los detalles de los Pokémon! Por favor, intenta de nuevo.");
       } finally {
         setLoading(false);
       }
@@ -118,8 +127,16 @@ function App() {
         }}
       />
 
-      {/* {loading ? <Loader /> : <PokemonGrid pokemons={pokemonsInPage} />}
-      {!loading && pageTotal > 0 && ( */}
+      {error ? (
+        <ErrorMessage message={error} onRetry={() => window.location.reload()} />
+      ) : loading ? (
+        <Loader />
+      ) : filteredList.length === 0 ? (
+        <NoResults query={query} />
+      ) : (
+        <PokemonGrid pokemons={pokemonsInPage} />
+      )}
+
       {loading ? (
         <Loader />
       ) :  filteredList.length === 0 ? (
@@ -129,7 +146,7 @@ function App() {
           <PokemonGrid pokemons={pokemonsInPage} />
       )}
       
-      {!loading && pageTotal > 0 && (
+      {!error && !loading && pageTotal > 0 && (
 
       <Pagination
         currentPage={currentPage}

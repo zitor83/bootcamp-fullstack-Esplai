@@ -372,3 +372,45 @@ input[type="number"] {
     color: #666;
     margin-bottom: var(--spacing-small);
 }
+
+/* =========================================
+   ESTADO DE ERROR
+   ========================================= */
+.error-container {
+    text-align: center;
+    padding: var(--spacing-extra-large) var(--spacing-large);
+    background-color: #fff0f0;
+    border: 2px solid #e2d8d8;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    margin-top: var(--spacing-large);
+    animation: fade-in-up 0.5s ease both;
+}
+
+.error-container h2 {
+    color: var(--color-terciary);
+    margin-bottom: var(--spacing-small);
+}
+
+.error-text {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: var(--spacing-large);
+}
+
+.retry-button {
+    background-color: var(--color-terciary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.retry-button:hover {
+    background-color: #c81d1d;
+    transform: translateY(-2px);
+}
