@@ -5,6 +5,7 @@ import { getPokemonDetails } from "./services/api";
 import PokemonGrid from "./components/PokemonGrid";
 import Pagination from "./components/Pagination";
 import Loader from "./components/Loader";
+import NoResults from "./components/NoResults";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -117,12 +118,23 @@ function App() {
         }}
       />
 
-      {loading ? <Loader /> : <PokemonGrid pokemons={pokemonsInPage} />}
+      {/* {loading ? <Loader /> : <PokemonGrid pokemons={pokemonsInPage} />}
+      {!loading && pageTotal > 0 && ( */}
+      {loading ? (
+        <Loader />
+      ) :  filteredList.length === 0 ? (
+        <NoResults query={query} />
+      ) : (
+        
+          <PokemonGrid pokemons={pokemonsInPage} />
+      )}
+      
       {!loading && pageTotal > 0 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={pageTotal}
-          onPrevious={() => setcurrentPage((prev) => prev - 1)}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={pageTotal}
+        onPrevious={() => setcurrentPage((prev) => prev - 1)}
           onNext={() => setcurrentPage((prev) => prev + 1)}
           onPageChange={(newPage) => setcurrentPage(newPage)}
         />
