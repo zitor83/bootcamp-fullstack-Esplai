@@ -7,6 +7,7 @@ import Pagination from "./components/Pagination";
 import Loader from "./components/Loader";
 import NoResults from "./components/NoResults";
 import ErrorMessage from "./components/ErrorMessage";
+import { useDebounce } from "./hooks/useDebounce";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -16,6 +17,10 @@ function App() {
 
   // 2. Estado para el texto de búsqueda que el usuario ingresa para filtrar la lista global
   const [query, setQuery] = useState("");
+  // Usamos el hook personalizado useDebounce para obtener un valor debounced del texto de búsqueda, con un delay de 500ms. 
+  // Esto significa que el valor debouncedQuery solo se actualizará después de que el usuario deje de escribir por 500ms.
+  const debouncedQuery = useDebounce(query, 500); 
+  
 
   // 3. Estado para la página actual que el usuario está viendo (inicia en 1)
   const [currentPage, setcurrentPage] = useState(1);
@@ -61,13 +66,13 @@ function App() {
   // ESTADOS DERIVADOS (Los calculamos a partir de los estados anteriores)
   // ==========================================
 
-  // Filtramos la lista global basándonos en el texto de búsqueda
+  // Filtramos la lista global basándonos en el texto de búsqueda debouncedQuery.
   const filteredList = useMemo(
     () =>
       globalList.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(query.toLowerCase()),
+        pokemon.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
       ),
-    [globalList, query],
+    [globalList, debouncedQuery],
   ); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda. Esto evita un loop infinito de renderizados.
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
