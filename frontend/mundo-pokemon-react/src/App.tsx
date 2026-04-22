@@ -8,6 +8,7 @@ import Loader from "./components/Loader";
 import NoResults from "./components/NoResults";
 import ErrorMessage from "./components/ErrorMessage";
 import { useDebounce } from "./hooks/useDebounce";
+import PokemonDetailPanel from "./components/PokemonDetailPanel";
 
 const POKEMONS_BY_PAGE = 24;
 
@@ -17,10 +18,9 @@ function App() {
 
   // 2. Estado para el texto de búsqueda que el usuario ingresa para filtrar la lista global
   const [query, setQuery] = useState("");
-  // Usamos el hook personalizado useDebounce para obtener un valor debounced del texto de búsqueda, con un delay de 500ms. 
+  // Usamos el hook personalizado useDebounce para obtener un valor debounced del texto de búsqueda, con un delay de 500ms.
   // Esto significa que el valor debouncedQuery solo se actualizará después de que el usuario deje de escribir por 500ms.
-  const debouncedQuery = useDebounce(query, 500); 
-  
+  const debouncedQuery = useDebounce(query, 500);
 
   // 3. Estado para la página actual que el usuario está viendo (inicia en 1)
   const [currentPage, setcurrentPage] = useState(1);
@@ -34,6 +34,10 @@ function App() {
   // 6. Estado para el mensaje de error
   const [error, setError] = useState<string | null>(null);
 
+  // 7. Estado para el Pokémon seleccionado (para mostrar en el panel lateral)
+  const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(
+    null,
+  );
 
   // USE EFFECT PARA CARGAR LA LISTA GLOBAL DE POKEMONES AL INICIAR LA APLICACION
   useEffect(() => {
@@ -51,7 +55,9 @@ function App() {
         setGlobalList(data.results);
       } catch (error) {
         console.error("Error al cargar la lista de Pokémon:", error);
-        setError("¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.");
+        setError(
+          "¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.",
+        );
       } finally {
         setLoading(false);
       }
@@ -113,7 +119,9 @@ function App() {
         setPokemonsInPage(pokemonInPageDetails);
       } catch (error) {
         console.error("Error cargando los detalles:", error);
-        setError("¡No se pudieron cargar los detalles de los Pokémon! Por favor, intenta de nuevo.");
+        setError(
+          "¡No se pudieron cargar los detalles de los Pokémon! Por favor, intenta de nuevo.",
+        );
       } finally {
         setLoading(false);
       }
@@ -129,38 +137,48 @@ function App() {
         onChange={(newText) => {
           setQuery(newText);
           setcurrentPage(1); // Reset de página al buscar
+          setSelectedPokemon(null); // Reset de pokemon seleccionado al buscar algo nuevo.
         }}
       />
+      {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
+      <div className="layout-container">
 
-      {error ? (
-        <ErrorMessage message={error} onRetry={() => window.location.reload()} />
-      ) : loading ? (
-        <Loader />
-      ) : filteredList.length === 0 ? (
-        <NoResults query={query} />
-      ) : (
-        <PokemonGrid pokemons={pokemonsInPage} />
-      )}
+      {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes */}
+      <div className="grid-section">
+        {error ? (
+          <ErrorMessage
+            message={error}
+            onRetry={() => window.location.reload()}
+          />
+        ) : loading ? (
+          <Loader />
+        ) : filteredList.length === 0 ? (
+          <NoResults query={query} />
+        ) : (
+          <PokemonGrid
+            pokemons={pokemonsInPage}
+            onSelectPokemon={setSelectedPokemon}
+          />
+        )}
+        {!error && !loading && pageTotal > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={pageTotal}
+            onPrevious={() => setcurrentPage((prev) => prev - 1)}
+            onNext={() => setcurrentPage((prev) => prev + 1)}
+            onPageChange={(newPage) => setcurrentPage(newPage)}
+          />
+        )}
+      </div>
 
-      {loading ? (
-        <Loader />
-      ) :  filteredList.length === 0 ? (
-        <NoResults query={query} />
-      ) : (
-        
-          <PokemonGrid pokemons={pokemonsInPage} />
-      )}
-      
-      {!error && !loading && pageTotal > 0 && (
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={pageTotal}
-        onPrevious={() => setcurrentPage((prev) => prev - 1)}
-          onNext={() => setcurrentPage((prev) => prev + 1)}
-          onPageChange={(newPage) => setcurrentPage(newPage)}
+      {/* ESTE SERIA EL LADO DERECHO: El panel de detalles */}
+      {selectedPokemon && (
+        <PokemonDetailPanel
+          pokemon={selectedPokemon}
+          onClose={() => setSelectedPokemon(null)}
         />
       )}
+      </div>
     </main>
   );
 }
