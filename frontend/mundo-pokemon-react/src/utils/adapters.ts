@@ -2,7 +2,7 @@
 
 import type { PokemonDetail } from "../types/pokemon";
 
-// Función para adaptar las URLs de las imágenes de los pokémon, intentando obtener la mejor calidad disponible.
+// Función para adaptar las URLs de las imágenes de los pokémon.
 export function adaptSpriteUrls(sprites: any): string {
     return (
         sprites?.other?.['official-artwork']?.front_default ||
@@ -13,18 +13,35 @@ export function adaptSpriteUrls(sprites: any): string {
     );
 }
 
-// Función para transformar el array de pokemons detallados a un formato más simple y adaptado a nuestras necesidades de visualización.
-//  Solo queremos el id, el nombre, los tipos y de quién evoluciona (si es que evoluciona de alguien) y la imagen, así que esta función se encarga de extraer esa información y formatearla adecuadamente.
-export function adaptPokemonData(dataPokemon: any, evolvesFrom: string | null): PokemonDetail {
+
+export function adaptPokemonData(dataPokemon: any, dataSpecies: any): PokemonDetail {
+
+    // Extraemos la evolucion.
+    const evolvesFrom = dataSpecies.evolves_from_species
+        ? dataSpecies.evolves_from_species.name
+        : null;
+
+    //Buscamos la descripcion en español.Si no existe,en ingles.
+    const flavorTextEntry = dataSpecies.flavor_text_entries.find(
+        (entry: any) => entry.language.name === "es"
+    ) || dataSpecies.flavor_text_entries.find(
+        (entry: any) => entry.language.name === "en"
+    );
+
+    const cleanDescription = flavorTextEntry?.flavor_text.replace(/\f/g, " ").replace(/\n/g, " ") || "Sin descripción disponible.";
+    const METERS_CONVERTER = 0.1; // Convierte decimetros a metros )
+    const KILOGRAMS_CONVERTER = 0.1; // Convierte hectogramos a kilogramos
 
     return {
         id: dataPokemon.id,
         name: dataPokemon.name,
-        // La API de pokémon tiene varias URLs para las imágenes, algunas de mejor calidad que otras. Esta función se encarga de elegir la mejor disponible.
         image: adaptSpriteUrls(dataPokemon.sprites),
-        // La API devuelve los tipos en un formato anidado, así que los mapeamos para obtener solo el nombre del tipo en mayúsculas.
         types: dataPokemon.types.map((typeInfo: any) => typeInfo.type.name.toUpperCase()),
-        evolvesFrom: evolvesFrom
+        evolvesFrom: evolvesFrom,
+        height: parseFloat((dataPokemon.height * METERS_CONVERTER).toFixed(2)), // Convertimos de decímetros a metros y redondeamos a 2 decimales
+        weight: parseFloat((dataPokemon.weight * KILOGRAMS_CONVERTER).toFixed(2)), // Convertimos de hectogramos a kilogramos y redondeamos a 2 decimales
+        description: cleanDescription,
+        
     };
 
 }

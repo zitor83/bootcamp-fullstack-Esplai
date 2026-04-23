@@ -439,13 +439,15 @@ input[type="number"] {
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     padding: var(--spacing-large);
-    position: sticky; /* Magia: Se queda pegado al hacer scroll */
+    position: sticky; /* Se queda pegado al hacer scroll */
     top: 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: fade-in-up 0.3s ease both;
     flex-shrink: 0; /* Evita que el panel se aplaste si la pantalla es pequeña */
+    max-height: calc(100vh - 40px); /* Para que no sobresalga de la pantalla */
+    overflow: hidden auto; /* Permite scroll interno si el contenido es muy alto */ 
 }
 
 .close-panel-btn {
@@ -537,6 +539,74 @@ input[type="number"] {
     text-transform: capitalize;
 }
 
+.panel-description {
+    font-size: 0.95rem;
+    color: #333; 
+    line-height: 1.6;
+    font-style: italic;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-left: 4px solid var(--color-terciary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: var(--spacing-large);
+    width: 100%;
+    overflow-wrap: break-word;
+    text-align: left; 
+}
+
+.panel-physical-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-large);
+    margin-bottom: var(--spacing-medium);
+    background-color: #f8f8f8;
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--radius-md);
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.panel-abilities h3 {
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.panel-abilities ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-large);
+}
+
+.ability-item {
+    font-size: 0.9rem;
+    background-color: var(--color-secondary);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+
 /* =========================================
    RESPONSIVE (PORTÁTILES, TABLETS Y MÓVILES)
    ========================================= */
@@ -544,23 +614,20 @@ input[type="number"] {
 /* Pantallas medianas (Portátiles y Tablets) */
 @media (width <= 950px) {
     .pokemon-side-panel {
-        /* Despegamos el panel del layout y lo hacemos flotante */
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh; /* Que ocupe todo el alto de la pantalla */
-        z-index: 100;
-        border-radius: 0;
-        box-shadow: -5px 0 25px rgb(0 0 0 /40%);
+        width: 280px;
         overflow-y: auto; /* Scroll interno si el contenido es muy alto */
+        
+        .pokemon-grid {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
     }
 }
 
 /* Pantallas pequeñas (Móviles) */
-@media (width <= 600px) {
+@media (width <= 650px) {
     /* Hacemos las tarjetas más pequeñas para que sigan cabiendo 2 por fila */
     .pokemon-grid {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         gap: var(--spacing-small);
     }
 
@@ -579,6 +646,14 @@ input[type="number"] {
 
     /* El panel flotante ocupará toda la pantalla en móvil */
     .pokemon-side-panel {
-        width: 100%;
+       width: 100%; /* Ocupa todo el ancho de la pantalla */
+        position: sticky; /* Opcional: Se queda pegado arriba mientras haces scroll hacia los Pokémon */
+        top: 0;
+        z-index: 10;
+        border-radius: 0 0 var(--radius-md) var(--radius-md);
+    }
+
+    .layout-container {
+        flex-direction: column; 
     }
 }

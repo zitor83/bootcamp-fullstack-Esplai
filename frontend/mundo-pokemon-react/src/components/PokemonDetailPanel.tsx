@@ -38,6 +38,19 @@ function PokemonDetailPanel({ pokemon, onClose }: PokemonDetailPanelProps) {
           ))}
         </div>
 
+        <p className="panel-description">{pokemon.description}</p>
+
+        <div className="panel-physical-stats">
+          <div className="stat-box">
+            <span className="stat-label">Peso</span>
+            <span className="stat-value">{pokemon.weight} kg</span>
+          </div>
+          <div className="stat-box">
+            <span className="stat-label">Altura</span>
+            <span className="stat-value">{pokemon.height} m</span>
+          </div>
+        </div>
+
         {pokemon.evolvesFrom && (
           <div className="panel-evolution">
             <h3>Evoluciona de</h3>

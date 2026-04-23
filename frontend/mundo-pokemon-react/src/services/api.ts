@@ -15,10 +15,7 @@ export async function getPokemonDetails(urlPokemon: string): Promise<PokemonDeta
     const responseSpecies = await fetch(dataPokemon.species.url);
     const dataSpecies = await responseSpecies.json();
 
-    // 3. Inyectamos la evolución en nuestro objeto de datos del pokemon. Si el pokemon no tiene evolución, le asignamos null.
-    const evolvesFrom = dataSpecies.evolves_from_species
-        ? dataSpecies.evolves_from_species.name
-        : null;
 
-    return adaptPokemonData(dataPokemon, evolvesFrom);
+
+    return adaptPokemonData(dataPokemon, dataSpecies);
 }

@@ -142,42 +142,41 @@ function App() {
       />
       {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
       <div className="layout-container">
+        {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes */}
+        <div className="grid-section">
+          {error ? (
+            <ErrorMessage
+              message={error}
+              onRetry={() => window.location.reload()}
+            />
+          ) : loading ? (
+            <Loader />
+          ) : filteredList.length === 0 ? (
+            <NoResults query={query} />
+          ) : (
+            <PokemonGrid
+              pokemons={pokemonsInPage}
+              onSelectPokemon={setSelectedPokemon}
+            />
+          )}
+          {!error && !loading && pageTotal > 0 && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={pageTotal}
+              onPrevious={() => setcurrentPage((prev) => prev - 1)}
+              onNext={() => setcurrentPage((prev) => prev + 1)}
+              onPageChange={(newPage) => setcurrentPage(newPage)}
+            />
+          )}
+        </div>
 
-      {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes */}
-      <div className="grid-section">
-        {error ? (
-          <ErrorMessage
-            message={error}
-            onRetry={() => window.location.reload()}
-          />
-        ) : loading ? (
-          <Loader />
-        ) : filteredList.length === 0 ? (
-          <NoResults query={query} />
-        ) : (
-          <PokemonGrid
-            pokemons={pokemonsInPage}
-            onSelectPokemon={setSelectedPokemon}
+        {/* ESTE SERIA EL LADO DERECHO: El panel de detalles */}
+        {selectedPokemon && (
+          <PokemonDetailPanel
+            pokemon={selectedPokemon}
+            onClose={() => setSelectedPokemon(null)}
           />
         )}
-        {!error && !loading && pageTotal > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={pageTotal}
-            onPrevious={() => setcurrentPage((prev) => prev - 1)}
-            onNext={() => setcurrentPage((prev) => prev + 1)}
-            onPageChange={(newPage) => setcurrentPage(newPage)}
-          />
-        )}
-      </div>
-
-      {/* ESTE SERIA EL LADO DERECHO: El panel de detalles */}
-      {selectedPokemon && (
-        <PokemonDetailPanel
-          pokemon={selectedPokemon}
-          onClose={() => setSelectedPokemon(null)}
-        />
-      )}
       </div>
     </main>
   );
