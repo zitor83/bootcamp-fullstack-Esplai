@@ -86,7 +86,11 @@ function App() {
     Math.ceil(filteredList.length / POKEMONS_BY_PAGE),
   );
 
+<<<<<<< HEAD
   // 1. Calcular la porción de Pokémon 
+=======
+  // 1. Calcular la porción de 24 Pokémon 
+>>>>>>> dfb2350ce1a98bcb2fc69bc83164eae87bc7d242
   const startIndex = (currentPage - 1) * POKEMONS_BY_PAGE;
   const endIndex = startIndex + POKEMONS_BY_PAGE;
 
