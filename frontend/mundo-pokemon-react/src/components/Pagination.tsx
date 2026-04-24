@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Interface con los props que recibe el componente Pagination
 interface PaginationProps {
@@ -17,13 +17,17 @@ function Pagination({
   onNext,
   onPageChange,
 }: PaginationProps) {
-  // Estado local para almacenar lo que el usuario esta escribiendo temporalmente en el input de numero de pagina.
+  // 1. Estado para el input
   const [inputValue, setInputValue] = useState(() => currentPage.toString());
 
-  //Sincronizar el input si la pagina cambia por otros medios (por ejemplo, con los botones de siguiente/anterior)
-  useEffect(() => {
+  // 2. Estado para "recordar" cuál fue la última página que vimos
+  const [prevPage, setPrevPage] = useState(currentPage);
+
+  // 3. El patrón recomendado por React: Actualización durante el renderizado
+  if (currentPage !== prevPage) {
+    setPrevPage(currentPage);
     setInputValue(currentPage.toString());
-  }, [currentPage]);
+  }
 
   // Función para manejar el evento de ir a una página específica cuando el usuario presiona Enter o cambia el valor del input
   const handleGoToPage = () => {

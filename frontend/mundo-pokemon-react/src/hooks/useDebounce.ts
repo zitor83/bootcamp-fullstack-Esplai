@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 // Este hook personalizado se encarga de manejar el valor debounced (con retardo) de un texto de búsqueda.
-// Recibe el valor actual y un delay en milisegundos, y devuelve el valor debounced que se actualiza solo después de que el usuario haya dejado de escribir por el tiempo especificado.
+// Recibe el valor actual y un delay.Devuelve el valor debounced que se actualiza solo después de que el usuario haya dejado de escribir por el tiempo especificado.
 export function useDebounce(value: string, delay: number) {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
     useEffect(() => {
-        //Iniciamos un tempoprizador.
+        //Iniciamos un temporizador.
         const timer = setTimeout(() => {
             setDebouncedValue(value);
         }, delay);

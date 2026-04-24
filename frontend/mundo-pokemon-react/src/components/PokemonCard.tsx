@@ -1,11 +1,10 @@
 import type { PokemonDetail } from "../types/pokemon";
 
 // Interface para definir las props que recibirá el componente PokemonCard.
-// No podemos usar directamente PokemonDetail porque el componente PokemonCard solo necesita una parte de los datos que tiene PokemonDetail,
-// Es una buena práctica definir una interfaz específica para las props de cada componente, lo que hace que el código sea más claro y fácil de mantener.
+// No podemos usar directamente PokemonDetail porque el componente PokemonCard solo necesita una parte de los datos que tiene PokemonDetail.
 interface PokemonCardProps {
   pokemon: PokemonDetail;
-  onClick?: () => void;// Función opcional que se llamará cuando el usuario haga clic en la tarjeta del Pokémon. 
+  onClick?: () => void; // Función opcional que se llamará cuando el usuario haga clic en la tarjeta del Pokémon.
 }
 
 // Componente para mostrar la información de un Pokémon en una tarjeta.
