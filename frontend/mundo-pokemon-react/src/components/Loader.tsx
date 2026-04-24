@@ -1,5 +1,6 @@
 import buscandoGif from "../assets/buscando-pokemon.gif";
 
+// Componente para mostrar una pantalla de carga mientras se están obteniendo los datos de los Pokémon.
 function Loader() {
   return (
     <div className="loader-container">

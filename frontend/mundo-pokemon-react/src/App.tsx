@@ -10,19 +10,18 @@ import ErrorMessage from "./components/ErrorMessage";
 import { useDebounce } from "./hooks/useDebounce";
 import PokemonDetailPanel from "./components/PokemonDetailPanel";
 
-const POKEMONS_BY_PAGE = 24;
+const POKEMONS_BY_PAGE = 12;
 
 function App() {
-  // 1. Estado para la lista global de Pokémon  (sin filtrar). Aqui le paso un generico para decirle que es un array de PokemonBase, y el estado inicia como un array vacio.
+  // 1. Estado para la lista global de Pokémon  (sin filtrar).
   const [globalList, setGlobalList] = useState<PokemonBase[]>([]);
 
-  // 2. Estado para el texto de búsqueda que el usuario ingresa para filtrar la lista global
+  // 2. Estado para el texto de búsqueda.
   const [query, setQuery] = useState("");
-  // Usamos el hook personalizado useDebounce para obtener un valor debounced del texto de búsqueda, con un delay de 500ms.
-  // Esto significa que el valor debouncedQuery solo se actualizará después de que el usuario deje de escribir por 500ms.
+  // Usamos el hook personalizado useDebounce.
   const debouncedQuery = useDebounce(query, 500);
 
-  // 3. Estado para la página actual que el usuario está viendo (inicia en 1)
+  // 3. Estado para la página actual que el usuario está viendo
   const [currentPage, setcurrentPage] = useState(1);
 
   // 4. Estado para los detalles de los Pokémon de la página actual.
@@ -39,9 +38,9 @@ function App() {
     null,
   );
 
-  // USE EFFECT PARA CARGAR LA LISTA GLOBAL DE POKEMONES AL INICIAR LA APLICACION
+  // USE EFFECT PARA CARGAR LA LISTA GLOBAL
   useEffect(() => {
-    //Definimos la función asíncrona dentro del useEffect para cargar la lista global de Pokémon al iniciar la aplicación.
+    //Definimos la función asíncrona dentro del useEffect.
     const fetchInitialList = async () => {
       setLoading(true);
       setError(null); // Reseteamos el error antes de intentar cargar la lista
@@ -69,7 +68,7 @@ function App() {
   }, []);
 
   // ==========================================
-  // ESTADOS DERIVADOS (Los calculamos a partir de los estados anteriores)
+  // ESTADOS DERIVADOS (A partir de los estados anteriores)
   // ==========================================
 
   // Filtramos la lista global basándonos en el texto de búsqueda debouncedQuery.
@@ -79,7 +78,7 @@ function App() {
         pokemon.name.toLowerCase().includes(debouncedQuery.toLowerCase()),
       ),
     [globalList, debouncedQuery],
-  ); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda. Esto evita un loop infinito de renderizados.
+  ); // IMPORTANTE: Usamos useMemo para memorizar el resultado del filtrado y solo recalcularlo cuando cambie la lista global o el texto de búsqueda.
 
   // Calculamos el total de páginas basándonos en la lista ya filtrada
   const pageTotal = Math.max(
@@ -87,7 +86,7 @@ function App() {
     Math.ceil(filteredList.length / POKEMONS_BY_PAGE),
   );
 
-  // 1. Matemáticas para cortar la porción de 24 Pokémon (ESTADO DERIVADO)
+  // 1. Calcular la porción de Pokémon 
   const startIndex = (currentPage - 1) * POKEMONS_BY_PAGE;
   const endIndex = startIndex + POKEMONS_BY_PAGE;
 
@@ -100,8 +99,8 @@ function App() {
   // 2. Descarga los detalles cuando cambia la página o la búsqueda
   useEffect(() => {
     const fetchCurrentPageDetails = async () => {
-      // Si no hay Pokémon en este trozo (por ejemplo, si la búsqueda no dio resultados), vaciamos la pantalla y salimos
-      setError(null); // Reseteamos el error antes de intentar cargar los detalles
+      // Si no hay Pokémon en este trozo (Ej, si la búsqueda no da resultados), vacia la pantalla y salimos.
+      setError(null); // Reseteamos el error antes de intentar carga
       if (currentSlice.length === 0) {
         setPokemonsInPage([]);
         return;
@@ -112,7 +111,7 @@ function App() {
         const PokemonsInPagePromises = currentSlice.map((pokemon) =>
           getPokemonDetails(pokemon.url),
         );
-        // Esperamos a que TODAS las promesas de los 24 pokémon terminen
+        // Esperamos a que TODAS las promesas de los pokémon terminen
         const pokemonInPageDetails = await Promise.all(PokemonsInPagePromises);
 
         // Guardamos los detalles completos en el estado
@@ -142,7 +141,7 @@ function App() {
       />
       {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
       <div className="layout-container">
-        {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes */}
+        {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes de incluir el panel */}
         <div className="grid-section">
           {error ? (
             <ErrorMessage

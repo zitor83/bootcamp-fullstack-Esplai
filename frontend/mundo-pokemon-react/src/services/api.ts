@@ -4,8 +4,7 @@ import { adaptPokemonData } from "../utils/adapters";
 
 
 
-// Función para obtener los detalles de un Pokémon a partir de su URL en la API.
-// Esta función hace dos llamadas a la API: una para obtener los datos básicos del Pokémon y otra para obtener su evolución (si existe).
+// Función para obtener los detalles de un Pokémon a partir de su URL en la API.Esta función hace dos llamadas a la API.
 export async function getPokemonDetails(urlPokemon: string): Promise<PokemonDetail> {
     // 1. Pedimos la información del pokemon
     const response = await fetch(urlPokemon);

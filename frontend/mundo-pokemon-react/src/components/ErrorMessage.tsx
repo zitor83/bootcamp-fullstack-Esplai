@@ -7,7 +7,7 @@ interface ErrorMessageProps {
 function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
   return (
     <div className="error-container">
-      <h2>!Un Snorlax salvaje bloquea el camino!</h2>
+      <h2>¡Un Snorlax salvaje bloquea el camino!</h2>
       <p className="error-text">{message}</p>
       <button className="retry-button" onClick={onRetry}>
         Reintentar

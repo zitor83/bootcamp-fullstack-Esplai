@@ -12,9 +12,9 @@ export interface PokemonDetail {
   image: string;
   types: string[];
   evolvesFrom: string | null;
-  height: number; // Altura en pies
-  weight: number; // Peso en libras
+  height: number;
+  weight: number;
   description: string;
-  
+
 }
 

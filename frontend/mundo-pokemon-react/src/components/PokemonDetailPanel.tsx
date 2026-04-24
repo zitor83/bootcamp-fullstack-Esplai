@@ -1,4 +1,3 @@
-// src/components/PokemonDetailPanel.tsx
 import type { PokemonDetail } from "../types/pokemon";
 
 // Interface para definir las props que recibirá el componente PokemonDetailPanel.
@@ -11,7 +10,6 @@ interface PokemonDetailPanelProps {
 function PokemonDetailPanel({ pokemon, onClose }: PokemonDetailPanelProps) {
   return (
     <aside className="pokemon-side-panel">
-      {/* Botón para cerrar el panel */}
       <button
         className="close-panel-btn"
         onClick={onClose}

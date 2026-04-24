@@ -53,7 +53,6 @@ main {
 .search-bar form {
     width: 100%;
 
-    /* Para que ocupe todo el ancho disponible */
 }
 
 .search-bar input {
@@ -78,7 +77,7 @@ main {
     outline-offset: 2px;
     transform: scale(1.02);
 
-    /* Crece un poco para tomar protagonismo */
+
 }
 
 .search-bar input::placeholder {
@@ -89,7 +88,7 @@ main {
     display: grid;
     width: 100%;
 
-    /* La magia responsive ocurre aquí: */
+    /* La magia */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-medium);
 }
@@ -107,7 +106,6 @@ main {
 }
 
 .pokemon-card:hover {
-    /* Novedad: Desplazamiento corto hacia arriba y sombra más amplia [cite: 494, 495] */
     transform: translateY(-6px);
     box-shadow: 0 12px 28px rgb(0 0 0 / 20%);
 }
@@ -151,7 +149,6 @@ main {
 .pokemon-name::first-letter {
     text-transform: uppercase;
 
-    /* Solo la primera letra en mayúscula */
 }
 
 .pokemon-card .pokemon-info .pokemon-types {
@@ -187,7 +184,7 @@ main {
 .pokemon-evolution-from::first-letter {
     text-transform: uppercase;
 
-    /* Solo la primera letra en mayúscula */
+
 }
 
 /* =========================================
@@ -207,10 +204,8 @@ html::after {
     background-color: var(--color-text);
     transform: rotate(45deg);
 
-    /* Girarlos 45 grados */
+    /* Girarlos 45 grados los envia al fondo */
     z-index: -1;
-
-    /* Los envía detrás de todo */
 }
 
 /* Cuadrado Izquierdo */
@@ -235,11 +230,9 @@ body::after {
     height: 150px;
     background-color: var(--color-terciary);
     border-radius: 50%;
-
-    /* Los hace redondos */
     z-index: -1;
 
-    /* Los envía detrás de todo */
+
 }
 
 /* Círculo Izquierdo */
@@ -292,7 +285,6 @@ body::after {
     color: #b42929;
     grid-column: 1 / -1;
 
-    /* Para que ocupe todo el ancho del grid */
 }
 
 /* =========================================
@@ -332,8 +324,6 @@ body::after {
 .pagination-input:focus {
     border-color: var(--color-terciary);
     transform: scale(1.1);
-
-    /* Hace un pequeño zoom al hacer click */
 }
 
 
@@ -426,8 +416,8 @@ input[type="number"] {
 }
 
 .grid-section {
-    flex: 1; /* Ocupa todo el espacio restante */
-    min-width: 0; /* Previene desbordamientos extraños en flexbox */
+    flex: 1;
+    min-width: 0;
 }
 
 /* =========================================
@@ -439,15 +429,15 @@ input[type="number"] {
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
     padding: var(--spacing-large);
-    position: sticky; /* Se queda pegado al hacer scroll */
-    top: 20px; 
+    position: sticky;
+    top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: fade-in-up 0.3s ease both;
-    flex-shrink: 0; /* Evita que el panel se aplaste si la pantalla es pequeña */
-    max-height: calc(100vh - 40px); /* Para que no sobresalga de la pantalla */
-    overflow: hidden auto; /* Permite scroll interno si el contenido es muy alto */ 
+    flex-shrink: 0;
+    max-height: calc(100vh - 40px);
+    overflow: hidden auto;
 }
 
 .close-panel-btn {
@@ -541,7 +531,7 @@ input[type="number"] {
 
 .panel-description {
     font-size: 0.95rem;
-    color: #333; 
+    color: #333;
     line-height: 1.6;
     font-style: italic;
     background-color: #f9f9f9;
@@ -551,7 +541,7 @@ input[type="number"] {
     margin-bottom: var(--spacing-large);
     width: 100%;
     overflow-wrap: break-word;
-    text-align: left; 
+    text-align: left;
 }
 
 .panel-physical-stats {
@@ -612,11 +602,11 @@ input[type="number"] {
    ========================================= */
 
 /* Pantallas medianas (Portátiles y Tablets) */
-@media (width <= 950px) {
+@media (width <=950px) {
     .pokemon-side-panel {
         width: 280px;
-        overflow-y: auto; /* Scroll interno si el contenido es muy alto */
-        
+        overflow-y: auto;
+
         .pokemon-grid {
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         }
@@ -624,8 +614,7 @@ input[type="number"] {
 }
 
 /* Pantallas pequeñas (Móviles) */
-@media (width <= 650px) {
-    /* Hacemos las tarjetas más pequeñas para que sigan cabiendo 2 por fila */
+@media (width <=650px) {
     .pokemon-grid {
         grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         gap: var(--spacing-small);
@@ -644,16 +633,15 @@ input[type="number"] {
         font-size: 1.1rem;
     }
 
-    /* El panel flotante ocupará toda la pantalla en móvil */
     .pokemon-side-panel {
-       width: 100%; /* Ocupa todo el ancho de la pantalla */
-        position: sticky; /* Opcional: Se queda pegado arriba mientras haces scroll hacia los Pokémon */
+        width: 100%;
+        position: sticky;
         top: 0;
         z-index: 10;
         border-radius: 0 0 var(--radius-md) var(--radius-md);
     }
 
     .layout-container {
-        flex-direction: column; 
+        flex-direction: column;
     }
 }
