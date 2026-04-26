@@ -9,7 +9,8 @@ import NoResults from "./components/NoResults";
 import ErrorMessage from "./components/ErrorMessage";
 import { useDebounce } from "./hooks/useDebounce";
 import PokemonDetailPanel from "./components/PokemonDetailPanel";
-import { Route, Routes, useNavigate, useParams} from "react-router-dom";
+// Añadimos Outlet a la importación
+import { Route, Routes, useNavigate, useParams, Outlet } from "react-router-dom";
 
 const POKEMONS_BY_PAGE = 12;
 
@@ -137,59 +138,72 @@ function App() {
   }, [currentSlice]); // IMPORTANTE: Este efecto se dispara si cambia la página, el texto de búsqueda, o cuando la lista global se carga.
 
   return (
-    <main>
-      <SearchBar
-        value={query}
-        onChange={(newText) => {
-          setQuery(newText);
-          setcurrentPage(1); // Reset de página al buscar
-          navigate('/');// Navegamos a la página principal al hacer una nueva búsqueda, para mostrar el panel lateral.
-        }}
-      />
-      {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
-      <div className="layout-container">
-        {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes de incluir el panel */}
-        <div className="grid-section">
-          {error ? (
-            <ErrorMessage
-              message={error}
-              onRetry={() => window.location.reload()}
+    <Routes>
+      {/* RUTA PADRE (LAYOUT): Contiene la estructura fija que no desaparece */}
+      <Route
+        element={
+          <main>
+            <SearchBar
+              value={query}
+              onChange={(newText) => {
+                setQuery(newText);
+                setcurrentPage(1); // Reset de página al buscar
+                navigate('/');// Navegamos a la página principal al hacer una nueva búsqueda, para cerrar el panel lateral.
+              }}
             />
-          ) : loading ? (
-            <Loader />
-          ) : filteredList.length === 0 ? (
-            <NoResults query={query} />
-          ) : (
-            <PokemonGrid
-              pokemons={pokemonsInPage}
-              onSelectPokemon={(pokemon) => navigate(`/pokemon/${pokemon.id}`)}
-            />
-          )}
-          {!error && !loading && pageTotal > 0 && (
-            <Pagination
-              currentPage={currentPage}
-              totalPages={pageTotal}
-              onPrevious={() => setcurrentPage((prev) => prev - 1)}
-              onNext={() => setcurrentPage((prev) => prev + 1)}
-              onPageChange={(newPage) => setcurrentPage(newPage)}
-            />
-          )}
-        </div>
+            {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
+            <div className="layout-container">
+              {/* ESTE SERIA EL LADO IZQUIERDO: Todo lo que ya tenía antes de incluir el panel */}
+              <div className="grid-section">
+                {error ? (
+                  <ErrorMessage
+                    message={error}
+                    onRetry={() => window.location.reload()}
+                  />
+                ) : loading ? (
+                  <Loader />
+                ) : filteredList.length === 0 ? (
+                  <NoResults query={query} />
+                ) : (
+                  <PokemonGrid
+                    pokemons={pokemonsInPage}
+                    onSelectPokemon={(pokemon) => navigate(`/pokemon/${pokemon.id}`)}
+                  />
+                )}
+                {!error && !loading && pageTotal > 0 && (
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={pageTotal}
+                    onPrevious={() => setcurrentPage((prev) => prev - 1)}
+                    onNext={() => setcurrentPage((prev) => prev + 1)}
+                    onPageChange={(newPage) => setcurrentPage(newPage)}
+                  />
+                )}
+              </div>
 
-        {/* ESTE SERIA EL LADO DERECHO: El panel de detalles */}
-        <Routes>
-          <Route 
-            path="/pokemon/:id" 
-            element={
-              <PokemonDetailWrapper 
-                pokemons={pokemonsInPage} 
-                onClose={() => navigate('/')} 
-              />
-            } 
-          />
-        </Routes>
-      </div>
-    </main>
+              {/* El Outlet inyecta las rutas hijas en este hueco */}
+              <Outlet />
+            </div>
+          </main>
+        }
+      >
+        {/* RUTAS HIJAS: Definen qué se pinta dentro del <Outlet /> */}
+        
+        {/* Si la ruta es '/', el Outlet no renderiza nada (panel cerrado) */}
+        <Route path="/" element={null} />
+
+        {/* Si la ruta es '/pokemon/:id', el Outlet renderiza el panel */}
+        <Route 
+          path="/pokemon/:id" 
+          element={
+            <PokemonDetailWrapper 
+              pokemons={pokemonsInPage} 
+              onClose={() => navigate('/')} 
+            />
+          } 
+        />
+      </Route>
+    </Routes>
   );
 }
 
@@ -201,4 +215,5 @@ function PokemonDetailWrapper({ pokemons, onClose }: { pokemons: PokemonDetail[]
   if (!pokemon) return null;
   return <PokemonDetailPanel pokemon={pokemon} onClose={onClose} />;
 }
+
 export default App;
