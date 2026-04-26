@@ -8,9 +8,9 @@ import Loader from "./components/Loader";
 import NoResults from "./components/NoResults";
 import ErrorMessage from "./components/ErrorMessage";
 import { useDebounce } from "./hooks/useDebounce";
-import PokemonDetailPanel from "./components/PokemonDetailPanel";
 // Añadimos Outlet a la importación
-import { Route, Routes, useNavigate, useParams, Outlet } from "react-router-dom";
+import { Route, Routes, useNavigate, Outlet } from "react-router-dom";
+import PokemonDetailWrapper from "./components/PokemonDetailWrapper";
 
 const POKEMONS_BY_PAGE = 12;
 
@@ -92,8 +92,7 @@ function App() {
     Math.ceil(filteredList.length / POKEMONS_BY_PAGE),
   );
 
-
-  // 1. Calcular la porción de Pokémon 
+  // 1. Calcular la porción de Pokémon
 
   const startIndex = (currentPage - 1) * POKEMONS_BY_PAGE;
   const endIndex = startIndex + POKEMONS_BY_PAGE;
@@ -148,7 +147,7 @@ function App() {
               onChange={(newText) => {
                 setQuery(newText);
                 setcurrentPage(1); // Reset de página al buscar
-                navigate('/');// Navegamos a la página principal al hacer una nueva búsqueda, para cerrar el panel lateral.
+                navigate("/"); // Navegamos a la página principal al hacer una nueva búsqueda, para cerrar el panel lateral.
               }}
             />
             {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
@@ -167,7 +166,9 @@ function App() {
                 ) : (
                   <PokemonGrid
                     pokemons={pokemonsInPage}
-                    onSelectPokemon={(pokemon) => navigate(`/pokemon/${pokemon.id}`)}
+                    onSelectPokemon={(pokemon) =>
+                      navigate(`/pokemon/${pokemon.id}`)
+                    }
                   />
                 )}
                 {!error && !loading && pageTotal > 0 && (
@@ -188,32 +189,23 @@ function App() {
         }
       >
         {/* RUTAS HIJAS: Definen qué se pinta dentro del <Outlet /> */}
-        
+
         {/* Si la ruta es '/', el Outlet no renderiza nada (panel cerrado) */}
         <Route path="/" element={null} />
 
         {/* Si la ruta es '/pokemon/:id', el Outlet renderiza el panel */}
-        <Route 
-          path="/pokemon/:id" 
+        <Route
+          path="/pokemon/:id"
           element={
-            <PokemonDetailWrapper 
-              pokemons={pokemonsInPage} 
-              onClose={() => navigate('/')} 
+            <PokemonDetailWrapper
+              pokemons={pokemonsInPage}
+              onClose={() => navigate("/")}
             />
-          } 
+          }
         />
       </Route>
     </Routes>
   );
-}
-
-// Un pequeño componente "wrapper" para extraer el ID de la URL
-function PokemonDetailWrapper({ pokemons, onClose }: { pokemons: PokemonDetail[], onClose: () => void }) {
-  const { id } = useParams();
-  const pokemon = pokemons.find(p => p.id === Number(id));
-
-  if (!pokemon) return null;
-  return <PokemonDetailPanel pokemon={pokemon} onClose={onClose} />;
 }
 
 export default App;
