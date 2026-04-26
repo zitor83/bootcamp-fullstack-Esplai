@@ -1,6 +1,6 @@
 
 import type { PokemonDetail } from "../types/pokemon";
-import { adaptPokemonData } from "../utils/adapters";
+import { adaptPokemonData, type RawPokemonSpecies } from "../utils/adapters";
 
 
 
@@ -8,11 +8,13 @@ import { adaptPokemonData } from "../utils/adapters";
 export async function getPokemonDetails(urlPokemon: string): Promise<PokemonDetail> {
     // 1. Pedimos la información del pokemon
     const response = await fetch(urlPokemon);
+    if (!response.ok) throw new Error(`Error HTTP ${response.status} al cargar los detalles del Pokémon: ${response.statusText}`);
     const dataPokemon = await response.json();
 
     // 2. Pedimos la evolución que viene anidada en la información de la especie del pokemon
     const responseSpecies = await fetch(dataPokemon.species.url);
-    const dataSpecies = await responseSpecies.json();
+    if (!responseSpecies.ok) throw new Error(`Error HTTP ${responseSpecies.status} al cargar los detalles de la especie del Pokémon: ${responseSpecies.statusText}`);
+    const dataSpecies: RawPokemonSpecies = await responseSpecies.json();
 
 
 
