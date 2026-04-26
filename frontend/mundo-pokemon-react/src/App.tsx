@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import type { PokemonBase, PokemonDetail } from "./types/pokemon";
 import { getPokemonDetails } from "./services/api";
@@ -38,37 +38,39 @@ function App() {
   // 7. Hook de navegación de React Router para cambiar de páginas
   const navigate = useNavigate();
 
+  // 8. Estado para contar los reintentos de carga (para mostrar un mensaje diferente después de varios intentos fallidos)
+  const [retryCount, setRetryCount] = useState(0);
+
   // // 7. Estado para el Pokémon seleccionado (para mostrar en el panel lateral)
   //  Con las rutas no haría falta, pero lo dejamos para mostrar el panel lateral.
   // const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(
   //   null,
   // );
 
- 
-    //Definimos la función asíncrona dentro del useEffect.
-   const loadInitialData = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=-1");
-      
-      // CORRECCIÓN PUNTO 4: Comprobar errores HTTP
-      if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-      
-      const data = await response.json();
-      setGlobalList(data.results);
-    } catch (error) {
-      console.error("Error al cargar la lista de Pokémon:", error);
-      setError("¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  // Usamos la función en el montaje inicial
+  //Definimos la función asíncrona dentro del useEffect.
   useEffect(() => {
-    loadInitialData();
-  }, [loadInitialData]);
+    const fetchInitialList = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?limit=-1",
+        );
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        const data = await response.json();
+        setGlobalList(data.results);
+      } catch (error) {
+        console.error("Error al cargar la lista de Pokémon:", error);
+        setError(
+          "¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.",
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialList();
+  }, [retryCount]);
 
   // ==========================================
   // ESTADOS DERIVADOS (A partir de los estados anteriores)
@@ -154,7 +156,7 @@ function App() {
                 {error ? (
                   <ErrorMessage
                     message={error}
-                    onRetry={loadInitialData}
+                    onRetry={() => setRetryCount((prev) => prev + 1)}
                   />
                 ) : loading ? (
                   <Loader />
