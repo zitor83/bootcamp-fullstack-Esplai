@@ -20,6 +20,7 @@ export interface RawPokemonData {
     sprites: RawPokemonSprites;
     types: Array<{ type: { name: string } }>;
     abilities: Array<{ ability: { name: string } }>;
+    species: { url: string };
 }
 
 export interface RawPokemonSpecies {
