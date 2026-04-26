@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import SearchBar from "./components/SearchBar";
 import type { PokemonBase, PokemonDetail } from "./types/pokemon";
 import { getPokemonDetails } from "./services/api";
@@ -24,7 +24,7 @@ function App() {
   const debouncedQuery = useDebounce(query, 500);
 
   // 3. Estado para la página actual que el usuario está viendo
-  const [currentPage, setcurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // 4. Estado para los detalles de los Pokémon de la página actual.
   const [pokemonsInPage, setPokemonsInPage] = useState<PokemonDetail[]>([]);
@@ -44,34 +44,31 @@ function App() {
   //   null,
   // );
 
-  // USE EFFECT PARA CARGAR LA LISTA GLOBAL
-  useEffect(() => {
+ 
     //Definimos la función asíncrona dentro del useEffect.
-    const fetchInitialList = async () => {
-      setLoading(true);
-      setError(null); // Reseteamos el error antes de intentar cargar la lista
-      try {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=-1",
-        );
-        const data = await response.json();
-
-        // Guardamos la lista global de Pokémon en el estado. El resultado en data.results es un array de objetos con name y url.
-        setGlobalList(data.results);
-      } catch (error) {
-        console.error("Error al cargar la lista de Pokémon:", error);
-        setError(
-          "¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Llamamos a la función para cargar la lista global de Pokémon al iniciar la aplicación.
-    // Al pasar un array vacío como segundo argumento, este useEffect solo se ejecutará una vez al montar el componente, lo que es ideal para cargar datos iniciales.
-    fetchInitialList();
+   const loadInitialData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=-1");
+      
+      // CORRECCIÓN PUNTO 4: Comprobar errores HTTP
+      if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+      
+      const data = await response.json();
+      setGlobalList(data.results);
+    } catch (error) {
+      console.error("Error al cargar la lista de Pokémon:", error);
+      setError("¡No se pudo cargar la lista de Pokémon! Por favor, intenta de nuevo.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  // Usamos la función en el montaje inicial
+  useEffect(() => {
+    loadInitialData();
+  }, [loadInitialData]);
 
   // ==========================================
   // ESTADOS DERIVADOS (A partir de los estados anteriores)
@@ -146,7 +143,7 @@ function App() {
               value={query}
               onChange={(newText) => {
                 setQuery(newText);
-                setcurrentPage(1); // Reset de página al buscar
+                setCurrentPage(1); // Reset de página al buscar
                 navigate("/"); // Navegamos a la página principal al hacer una nueva búsqueda, para cerrar el panel lateral.
               }}
             />
@@ -157,7 +154,7 @@ function App() {
                 {error ? (
                   <ErrorMessage
                     message={error}
-                    onRetry={() => window.location.reload()}
+                    onRetry={loadInitialData}
                   />
                 ) : loading ? (
                   <Loader />
@@ -175,9 +172,9 @@ function App() {
                   <Pagination
                     currentPage={currentPage}
                     totalPages={pageTotal}
-                    onPrevious={() => setcurrentPage((prev) => prev - 1)}
-                    onNext={() => setcurrentPage((prev) => prev + 1)}
-                    onPageChange={(newPage) => setcurrentPage(newPage)}
+                    onPrevious={() => setCurrentPage((prev) => prev - 1)}
+                    onNext={() => setCurrentPage((prev) => prev + 1)}
+                    onPageChange={(newPage) => setCurrentPage(newPage)}
                   />
                 )}
               </div>
