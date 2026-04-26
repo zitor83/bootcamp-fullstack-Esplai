@@ -9,6 +9,7 @@ import NoResults from "./components/NoResults";
 import ErrorMessage from "./components/ErrorMessage";
 import { useDebounce } from "./hooks/useDebounce";
 import PokemonDetailPanel from "./components/PokemonDetailPanel";
+import { Route, Routes, useNavigate, useParams} from "react-router-dom";
 
 const POKEMONS_BY_PAGE = 12;
 
@@ -33,10 +34,14 @@ function App() {
   // 6. Estado para el mensaje de error
   const [error, setError] = useState<string | null>(null);
 
-  // 7. Estado para el Pokémon seleccionado (para mostrar en el panel lateral)
-  const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(
-    null,
-  );
+  // 7. Hook de navegación de React Router para cambiar de páginas
+  const navigate = useNavigate();
+
+  // // 7. Estado para el Pokémon seleccionado (para mostrar en el panel lateral)
+  //  Con las rutas no haría falta, pero lo dejamos para mostrar el panel lateral.
+  // const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetail | null>(
+  //   null,
+  // );
 
   // USE EFFECT PARA CARGAR LA LISTA GLOBAL
   useEffect(() => {
@@ -138,7 +143,7 @@ function App() {
         onChange={(newText) => {
           setQuery(newText);
           setcurrentPage(1); // Reset de página al buscar
-          setSelectedPokemon(null); // Reset de pokemon seleccionado al buscar algo nuevo.
+          navigate('/');// Navegamos a la página principal al hacer una nueva búsqueda, para mostrar el panel lateral.
         }}
       />
       {/* NUEVO CONTENEDOR FLEX PARA SEPARAR EL GRID DEL PANEL */}
@@ -157,7 +162,7 @@ function App() {
           ) : (
             <PokemonGrid
               pokemons={pokemonsInPage}
-              onSelectPokemon={setSelectedPokemon}
+              onSelectPokemon={(pokemon) => navigate(`/pokemon/${pokemon.id}`)}
             />
           )}
           {!error && !loading && pageTotal > 0 && (
@@ -172,15 +177,28 @@ function App() {
         </div>
 
         {/* ESTE SERIA EL LADO DERECHO: El panel de detalles */}
-        {selectedPokemon && (
-          <PokemonDetailPanel
-            pokemon={selectedPokemon}
-            onClose={() => setSelectedPokemon(null)}
+        <Routes>
+          <Route 
+            path="/pokemon/:id" 
+            element={
+              <PokemonDetailWrapper 
+                pokemons={pokemonsInPage} 
+                onClose={() => navigate('/')} 
+              />
+            } 
           />
-        )}
+        </Routes>
       </div>
     </main>
   );
 }
 
+// Un pequeño componente "wrapper" para extraer el ID de la URL
+function PokemonDetailWrapper({ pokemons, onClose }: { pokemons: PokemonDetail[], onClose: () => void }) {
+  const { id } = useParams();
+  const pokemon = pokemons.find(p => p.id === Number(id));
+
+  if (!pokemon) return null;
+  return <PokemonDetailPanel pokemon={pokemon} onClose={onClose} />;
+}
 export default App;
