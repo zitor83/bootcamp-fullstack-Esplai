@@ -1,3 +1,5 @@
+/* Codigo sin usar collections, con arrays y sin nulls
+
 package com.bootcamp.repository;
 
 import com.bootcamp.model.Responsable;
@@ -37,4 +39,36 @@ public class ResponsableRepository {
         return resultadoResponsables;
     }
 
+}
+
+ */
+
+package com.bootcamp.repository;
+
+import com.bootcamp.model.Responsable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ResponsableRepository {
+
+    private List<Responsable> responsables;
+
+    public ResponsableRepository() {
+        this.responsables = new ArrayList<>();
+    }
+
+    public void agregarResponsable(Responsable responsable) {
+        responsables.add(responsable);
+    }
+
+    public Responsable obtenerResponsablePorId(long id) {
+        return responsables.stream()
+                .filter(responsable -> responsable.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Responsable> obtenerTodosLosResponsables() {
+        return responsables;
+    }
 }

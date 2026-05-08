@@ -74,6 +74,6 @@ public class IncidenciaRepository {
     }
 
     public List<Incidencia> obtenerTodasLasIncidencias() {
-        return incidencias; // Devolvemos la lista tal cual, ¡ya no hay huecos nulos!
+        return incidencias; 
     }
 }

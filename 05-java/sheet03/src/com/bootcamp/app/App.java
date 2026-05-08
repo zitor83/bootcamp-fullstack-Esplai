@@ -14,7 +14,7 @@ public class App {
         System.out.println("GESTIÓN DE INCIDENCIAS - BOOTCAMP FULLSTACK ESPLAI");
 
         // 1.Crear el repositorio y el servicio
-        ResponsableRepository responsableRepository = new ResponsableRepository(10);
+        ResponsableRepository responsableRepository = new ResponsableRepository();
         ResponsableService responsableService = new ResponsableService(responsableRepository);
 
         IncidenciaRepository incidenciaRepository = new IncidenciaRepository();
