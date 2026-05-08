@@ -1,4 +1,4 @@
-package com.bootcamp.sheet03.ejercicio03;
+package com.bootcamp.sheet02.ejercicio03;
 
 public class Producto {
     private String nombre;

@@ -1,4 +1,4 @@
-package com.bootcamp.sheet03.ejercicio01;
+package com.bootcamp.sheet02.ejercicio01;
 
 public class Main {
     public static void main(String[] args) {
