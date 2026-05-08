@@ -1,5 +1,7 @@
 package com.bootcamp.service;
 
+import java.util.List;
+
 import com.bootcamp.model.Estado;
 import com.bootcamp.model.Incidencia;
 import com.bootcamp.model.Responsable;
@@ -46,6 +48,7 @@ public class IncidenciaService {
         }
     }
 
+    /*
     public void listarIncidencias() {
         Incidencia[] todasIncidencias = incidenciaRepository.obtenerTodasLasIncidencias();
         System.out.println("Lista de incidencias:");
@@ -55,5 +58,15 @@ public class IncidenciaService {
 
         System.out.println("Total de incidencias: " + todasIncidencias.length);
     }
+     */
 
+public void listarIncidencias() {
+        List<Incidencia> todasIncidencias = incidenciaRepository.obtenerTodasLasIncidencias();
+        
+        System.out.println("Lista de incidencias:");
+
+        todasIncidencias.forEach(incidencia -> System.out.println(incidencia.toString()));
+
+        System.out.println("Total de incidencias: " + todasIncidencias.size());
+    }
 }

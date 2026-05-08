@@ -17,7 +17,7 @@ public class App {
         ResponsableRepository responsableRepository = new ResponsableRepository(10);
         ResponsableService responsableService = new ResponsableService(responsableRepository);
 
-        IncidenciaRepository incidenciaRepository = new IncidenciaRepository(10);
+        IncidenciaRepository incidenciaRepository = new IncidenciaRepository();
         IncidenciaService incidenciaService = new IncidenciaService(incidenciaRepository, responsableService);
 
         // 2.Crear responsables de prueba e incidencias de prueba

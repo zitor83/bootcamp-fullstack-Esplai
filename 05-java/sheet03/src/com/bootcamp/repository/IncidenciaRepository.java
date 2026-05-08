@@ -1,3 +1,4 @@
+/* Codigo sin usar collections, con arrays y sin nulls
 package com.bootcamp.repository;
 
 import com.bootcamp.model.Incidencia;
@@ -41,4 +42,38 @@ public class IncidenciaRepository {
         return resultadoIncidencias;
     }
 
+}
+*/
+package com.bootcamp.repository;
+
+import com.bootcamp.model.Incidencia;
+import java.util.ArrayList;
+import java.util.List;
+
+public class IncidenciaRepository {
+
+    
+    private List<Incidencia> incidencias;
+
+    public IncidenciaRepository() {
+        
+        this.incidencias = new ArrayList<>();
+    }
+
+    public void agregarIncidencia(Incidencia incidencia) {
+        
+        incidencias.add(incidencia);
+    }
+
+    public Incidencia obtenerIncidenciaPorId(long id) {
+        
+        return incidencias.stream()
+                .filter(incidencia -> incidencia.getId() == id)
+                .findFirst()
+                .orElse(null); 
+    }
+
+    public List<Incidencia> obtenerTodasLasIncidencias() {
+        return incidencias; // Devolvemos la lista tal cual, ¡ya no hay huecos nulos!
+    }
 }
