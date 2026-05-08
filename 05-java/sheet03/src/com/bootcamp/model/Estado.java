@@ -1,4 +1,4 @@
-package com.bootcamp.gestion_incidencias.model;
+package com.bootcamp.model;
 
 public enum Estado {
     ABIERTA, ASIGNADA, EN_PROCESO, RESUELTA, CERRADA

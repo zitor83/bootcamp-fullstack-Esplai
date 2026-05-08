@@ -1,4 +1,4 @@
-package com.bootcamp.gestion_incidencias.model;
+package com.bootcamp.model;
 
 public class Responsable {
 
